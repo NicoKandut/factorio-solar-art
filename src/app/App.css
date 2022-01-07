@@ -1,0 +1,36 @@
+.app {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "settings canvas";
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100vh;
+  gap: 1rem;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.dark {
+  --bg-color: black;
+  --text-color: #808080;
+  --layer-color: #121212;
+}
+
+.app-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.app-settings {
+  grid-area: settings;
+}
+
+.app-canvas {
+  grid-area: canvas;
+}
