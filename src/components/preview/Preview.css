@@ -1,0 +1,22 @@
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(140, 105, 58);
+  border-radius: var(--button-rounding);
+  max-height: 60vh;
+}
+
+.solarpanels,
+.accumulators,
+.powerpoles,
+.roboports,
+.tiles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  object-fit: contain;
+}

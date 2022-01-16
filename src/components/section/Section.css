@@ -1,0 +1,22 @@
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  /* reset */
+  color: inherit;
+
+  /* layout */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding-block: var(--spacing-inline);
+
+  /* theming */
+  border-bottom: solid var(--line-strength) var(--text-color);
+}
+
+.section-content {
+  height: 100%;
+}
