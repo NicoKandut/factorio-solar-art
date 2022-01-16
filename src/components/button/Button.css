@@ -1,0 +1,26 @@
+.button {
+  /* reset */
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: medium;
+
+  /* layout */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+  padding: var(--spacing-inline);
+
+  /* theming */
+  border-radius: var(--button-rounding);
+  background-color: var(--layer-color);
+  transition: filter var(--transition-time) ease-out;
+}
+
+.button:hover {
+  filter: brightness(1.5);
+}
+
+.button:active {
+  filter: brightness(0.8);
+}

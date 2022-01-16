@@ -1,0 +1,6 @@
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--spacing-inline);
+  gap: var(--spacing-inline);
+}

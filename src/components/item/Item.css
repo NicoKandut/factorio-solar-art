@@ -1,0 +1,14 @@
+.item {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.item-count {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 10px;
+  color: white;
+  font-weight: bold;
+}

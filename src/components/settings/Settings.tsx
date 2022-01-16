@@ -1,17 +1,14 @@
-import { Config, Mode } from "../../types/types";
-import Checkbox from "../checkbox/Checkbox";
-import Select from "../select/Select";
-import Slider from "../slider/Slider";
-import Textbox from "../textbox/Textbox";
+import type { Config } from "../../types/types";
+import { Checkbox } from "../checkbox/Checkbox";
+import { Slider } from "../slider/Slider";
+import { Textbox } from "../textbox/Textbox";
 
 interface Props {
   config: Config;
   setConfig: (config: Config) => void;
 }
 
-const modeOptions: Mode[] = ["exact", "sloppy"];
-
-function Settings(props: Props) {
+export const Settings = (props: Props) => {
   const { config, setConfig } = props;
 
   return (
@@ -37,21 +34,13 @@ function Settings(props: Props) {
       >
         <span>Use roboports</span>
       </Checkbox>
-      <Select
-        value={config.mode}
-        options={modeOptions}
-        setValue={(v) => setConfig({ ...config, mode: v as Mode })}
-      >
-        <span>Calculation scale</span>
-      </Select>
       <Textbox
         value={config.name}
         setValue={(v) => setConfig({ ...config, name: v })}
       >
         <span>Name</span>
       </Textbox>
+      <button onClick={() => setConfig({ ...config })}>Recalculate</button>
     </>
   );
-}
-
-export default Settings;
+};

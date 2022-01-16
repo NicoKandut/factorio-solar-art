@@ -1,0 +1,4 @@
+.copy-button .icon {
+  height: var(--inline-icon-size);
+  width: var(--inline-icon-size);
+}

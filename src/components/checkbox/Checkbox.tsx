@@ -6,7 +6,7 @@ interface Props {
   setValue: (value: boolean) => void;
 }
 
-function Checkbox(props: PropsWithChildren<Props>) {
+export const Checkbox = (props: PropsWithChildren<Props>) => {
   const { value, setValue } = props;
 
   return (
@@ -19,6 +19,4 @@ function Checkbox(props: PropsWithChildren<Props>) {
       {props.children}
     </div>
   );
-}
-
-export default Checkbox;
+};

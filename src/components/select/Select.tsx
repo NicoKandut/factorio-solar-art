@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 interface Props {
   value: string;
@@ -6,7 +6,7 @@ interface Props {
   setValue: (value: string) => void;
 }
 
-function Select(props: PropsWithChildren<Props>) {
+export const Select = (props: PropsWithChildren<Props>) => {
   const { options, value, setValue, children } = props;
 
   return (
@@ -19,6 +19,4 @@ function Select(props: PropsWithChildren<Props>) {
       {children}
     </div>
   );
-}
-
-export default Select;
+};

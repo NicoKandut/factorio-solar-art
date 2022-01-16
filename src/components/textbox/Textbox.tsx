@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 interface Props {
   value: string;
   setValue: (value: string) => void;
 }
 
-function Textbox(props: PropsWithChildren<Props>) {
+export const Textbox = (props: PropsWithChildren<Props>) => {
   const { value, setValue, children } = props;
 
   return (
@@ -18,6 +18,4 @@ function Textbox(props: PropsWithChildren<Props>) {
       {children}
     </div>
   );
-}
-
-export default Textbox;
+};

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 interface Props {
   value: number;
@@ -8,7 +8,7 @@ interface Props {
   setValue: (value: number) => void;
 }
 
-function Slider(props: PropsWithChildren<Props>) {
+export const Slider = (props: PropsWithChildren<Props>) => {
   const { value, setValue, min, max, step, children } = props;
 
   return (
@@ -24,6 +24,4 @@ function Slider(props: PropsWithChildren<Props>) {
       {children}
     </div>
   );
-}
-
-export default Slider;
+};

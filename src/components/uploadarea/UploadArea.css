@@ -1,0 +1,22 @@
+.upload-icon {
+  font-size: 4rem;
+}
+
+.upload-button {
+  font-size: medium;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  border-radius: 3px;
+  padding: 0.4rem;
+  background-color: var(--layer-color);
+}
+
+.upload-area {
+  border-radius: 3px;
+  border: dashed 2px var(--layer-color);
+  height: 100%;
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
