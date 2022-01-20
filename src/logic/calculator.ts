@@ -153,7 +153,7 @@ export const calculateBlueprint = async (
             blueprint.blueprint.entities.push({
               entity_number: entity_number++,
               name: "stone-wall",
-              position: { x: entityX + x, y: entityY + y },
+              position: { x: entityX + x - 1, y: entityY + y - 1 },
             });
           }
         } else {
@@ -163,7 +163,7 @@ export const calculateBlueprint = async (
               blueprint.blueprint.entities.push({
                 entity_number: entity_number++,
                 name: "stone-wall",
-                position: { x: entityX + xi, y: entityY + yi },
+                position: { x: entityX + xi - 1, y: entityY + yi - 1 },
               });
             }
           }
@@ -192,14 +192,14 @@ export const calculateBlueprint = async (
 
       // cant place any solar panels on the robo port pixels
       if (type === "solar-panel") {
-        if (needsRoboPort) {
+        if (needsRoboPort && config.tiles) {
           const tilePositions = needsPowerPole
             ? tilesWithBoth
             : tilesWithRoboport;
           tilePositions.forEach(([x, y]) => {
             blueprint.blueprint.tiles.push({
-              name: "concrete-reinforced",
-              position: { x: entityX + x, y: entityY + y },
+              name: "refined-concrete",
+              position: { x: entityX + x - 1, y: entityY + y - 1 },
             });
           });
         } else {
@@ -209,8 +209,8 @@ export const calculateBlueprint = async (
                 if (config.tiles) {
                   tilesWithSubstation.forEach(([x, y]) => {
                     blueprint.blueprint.tiles.push({
-                      name: "concrete-reinforced",
-                      position: { x: entityX + x, y: entityY + y },
+                      name: "refined-concrete",
+                      position: { x: entityX + x - 1, y: entityY + y - 1 },
                     });
                   });
                 }

@@ -48,7 +48,7 @@ export const Preview = (props: Props) => {
   useCachedEntityCanvas(
     tiles,
     concreteReinforcedRef.current,
-    "concrete-reinforced",
+    "refined-concrete",
     1,
     offset
   );
@@ -82,7 +82,7 @@ export const Preview = (props: Props) => {
       />
       <canvas
         ref={concreteReinforcedRef}
-        className="concrete-reinforced"
+        className="refined-concrete"
         width={width}
         height={height}
       />

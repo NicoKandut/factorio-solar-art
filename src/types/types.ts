@@ -67,7 +67,7 @@ export type EntityType =
   | "accumulator"
   | "stone-wall";
 
-export type TileType = "stone-path" | "concrete" | "concrete-reinforced";
+export type TileType = "stone-path" | "concrete" | "refined-concrete";
 
 export type ExtendedEntityType =
   | EntityType
@@ -82,7 +82,7 @@ export const entityColors: Record<ExtendedEntityType, string> = {
   roboport: "rgb(214, 206, 132)",
   "stone-path": "rgb(0, 0, 0)",
   concrete: "rgb(59, 61, 58)",
-  "concrete-reinforced": "rgb(49, 50, 42)",
+  "refined-concrete": "rgb(49, 50, 42)",
   ground: "rgb(140, 105, 58)",
   transparent: "transparent",
   "stone-wall": "rgb(217, 216, 207)",

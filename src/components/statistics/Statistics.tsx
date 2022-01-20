@@ -28,7 +28,7 @@ export const Statistics = (props: Props) => {
           substation: 0,
           roboport: 0,
           "stone-wall": 0,
-          "concrete-reinforced": 0,
+          "refined-concrete": 0,
         } as Record<EntityType | TileType, number>
       );
     }

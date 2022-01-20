@@ -19,7 +19,7 @@ const itemUrls: Partial<Record<Items, string>> = {
   roboport:
     "https://wiki.factorio.com/images/thumb/Roboport.png/32px-Roboport.png",
   "stone-wall": "https://wiki.factorio.com/images/thumb/Wall.png/32px-Wall.png",
-  "concrete-reinforced":
+  "refined-concrete":
     "https://wiki.factorio.com/images/thumb/Refined_concrete.png/32px-Refined_concrete.png",
 };
 

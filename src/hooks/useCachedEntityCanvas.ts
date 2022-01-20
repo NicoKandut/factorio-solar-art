@@ -25,7 +25,12 @@ export const useCachedEntityCanvas = (
   useEffect(() => {
     if (canvas && filteredEntities) {
       const context = canvas.getContext("2d");
-      const additionalOffset = type === "roboport" ? -1 : 0;
+      const additionalOffset =
+        type === "roboport"
+          ? -1
+          : type === "stone-wall" || type === "refined-concrete"
+          ? 1
+          : 0;
 
       console.log(type, filteredEntities.length);
 
