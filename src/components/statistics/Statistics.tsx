@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { EntityType, FactorioBlueprint, TileType } from "../../types/types";
+import { EntityType, FactorioBlueprint, TileType } from "../../types/factorio";
 import { Item } from "../item/Item";
 import "./Statistics.css";
 

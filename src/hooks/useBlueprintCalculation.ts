@@ -1,7 +1,9 @@
 import { RefObject, useEffect } from "react";
 import { calculateBlueprint } from "../logic/calculator";
 import { sharedCanvasContext } from "../logic/sharedCanvasContext";
-import { Config, FactorioBlueprint, Size } from "../types/types";
+import { FactorioBlueprint } from "../types/factorio";
+import { Size } from "../types/types";
+import { Config } from "../types/ui";
 
 export const useBlueprintCalculation = (
   imageRef: RefObject<HTMLImageElement>,

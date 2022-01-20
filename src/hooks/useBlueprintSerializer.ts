@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { encode } from "../logic/serialization";
-import { FactorioBlueprint } from "../types/types";
+import { FactorioBlueprint } from "../types/factorio";
 
 export const useBlueprintSerializer = (
   blueprint: FactorioBlueprint | null | undefined,

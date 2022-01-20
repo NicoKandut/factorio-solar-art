@@ -4,6 +4,7 @@
   --spacing-grid: 1rem;
   --button-rounding: 3px;
   --transition-time: 0.1s;
+  --transition-time-long: 0.4s;
   --inline-icon-size: 24px;
   --line-strength: 1px;
 
@@ -18,6 +19,7 @@
 
   /* theming */
   background-color: var(--bg-color);
+  transition: background-color var(--transition-time-long) ease-out;
   color: var(--text-color);
 }
 
@@ -56,6 +58,14 @@
   --bg-color: black;
   --text-color: #808080;
   --layer-color: #121212;
+  --success: #55b355;
+  --error: #ca4f4f;
+}
+
+.light {
+  --bg-color: white;
+  --text-color: black;
+  --layer-color: #e6e6e6;
   --success: #55b355;
   --error: #ca4f4f;
 }

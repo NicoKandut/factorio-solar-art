@@ -1,4 +1,4 @@
-import type { Config } from "../../types/types";
+import type { Config } from "../../types/ui";
 import { Checkbox } from "../checkbox/Checkbox";
 import { Slider } from "../slider/Slider";
 import { Textbox } from "../textbox/Textbox";

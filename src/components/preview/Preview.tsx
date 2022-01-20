@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useCachedEntityCanvas } from "../../hooks/useCachedEntityCanvas";
-import { FactorioEntity, FactorioTile } from "../../types/types";
+import { FactorioEntity, FactorioTile } from "../../types/factorio";
 
 import "./Preview.css";
 

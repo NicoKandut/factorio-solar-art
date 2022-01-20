@@ -1,9 +1,11 @@
 import {
-  Config,
   EntityType,
   FactorioBlueprint,
   FactorioEntity,
-} from "../types/types";
+} from "../types/factorio";
+import { Config } from "../types/ui";
+
+type PixelType = "stone-wall" | "accumulator" | "solar-panel" | "transparent";
 
 const scale = 6;
 
@@ -64,10 +66,7 @@ const index = (x: number, y: number, width: number, size: number) =>
 /**
  * maps a color to a type
  */
-const mapColor = (
-  color: number[],
-  config: Config
-): EntityType | "transparent" => {
+const mapColor = (color: number[], config: Config): PixelType => {
   const isTransparent = config.transparency && color[3] === 0;
   const brightness =
     ((color[0] + color[1] + color[2]) * color[3]) / 255 / 255 / 3;
@@ -99,9 +98,6 @@ export const calculateBlueprint = async (
       label: config.name,
       entities: [],
       tiles: [],
-      label_color: { r: 0, g: 0, b: 0, a: 0 },
-      icons: [],
-      schedules: [],
       version: 1,
     },
   };
@@ -136,98 +132,7 @@ export const calculateBlueprint = async (
       const entityX = scaledX - halfWidth;
       const entityY = scaledY - halfHeight;
 
-      if (type === "stone-wall") {
-        console.log("wall", entityX, entityY);
-        const wallPositions =
-          needsPowerPole && needsRoboPort
-            ? tilesWithBoth
-            : needsPowerPole
-            ? tilesWithSubstation
-            : needsRoboPort
-            ? tilesWithRoboport
-            : null;
-
-        if (wallPositions) {
-          for (let [x, y] of wallPositions) {
-            console.log(" - pushing");
-            blueprint.blueprint.entities.push({
-              entity_number: entity_number++,
-              name: "stone-wall",
-              position: { x: entityX + x - 1, y: entityY + y - 1 },
-            });
-          }
-        } else {
-          for (let yi = 0; yi < 6; yi++) {
-            for (let xi = 0; xi < 6; xi++) {
-              console.log(" - pushing");
-              blueprint.blueprint.entities.push({
-                entity_number: entity_number++,
-                name: "stone-wall",
-                position: { x: entityX + xi - 1, y: entityY + yi - 1 },
-              });
-            }
-          }
-        }
-      }
-
-      if (type === "accumulator") {
-        for (let yi = 0; yi < 3; yi++) {
-          for (let xi = 0; xi < 3; xi++) {
-            if (needsPowerPole && yi === 0 && xi === 0) {
-              continue;
-            }
-
-            if (needsRoboPort && yi > 0 && xi > 0) {
-              continue;
-            }
-
-            blueprint.blueprint.entities.push({
-              entity_number: entity_number++,
-              name: "accumulator",
-              position: { x: entityX + xi * 2, y: entityY + yi * 2 },
-            } as FactorioEntity);
-          }
-        }
-      }
-
-      // cant place any solar panels on the robo port pixels
-      if (type === "solar-panel") {
-        if (needsRoboPort && config.tiles) {
-          const tilePositions = needsPowerPole
-            ? tilesWithBoth
-            : tilesWithRoboport;
-          tilePositions.forEach(([x, y]) => {
-            blueprint.blueprint.tiles.push({
-              name: "refined-concrete",
-              position: { x: entityX + x - 1, y: entityY + y - 1 },
-            });
-          });
-        } else {
-          for (let yi = 0; yi < 2; yi++) {
-            for (let xi = 0; xi < 2; xi++) {
-              if (yi === 0 && xi === 0 && needsPowerPole) {
-                if (config.tiles) {
-                  tilesWithSubstation.forEach(([x, y]) => {
-                    blueprint.blueprint.tiles.push({
-                      name: "refined-concrete",
-                      position: { x: entityX + x - 1, y: entityY + y - 1 },
-                    });
-                  });
-                }
-
-                continue;
-              }
-
-              blueprint.blueprint.entities.push({
-                entity_number: entity_number++,
-                name: "solar-panel",
-                position: { x: entityX + xi * 3, y: entityY + yi * 3 },
-              } as FactorioEntity);
-            }
-          }
-        }
-      }
-
+      // handle power and logistics coverage
       if (needsPowerPole) {
         blueprint.blueprint.entities.push({
           entity_number: entity_number++,
@@ -242,6 +147,83 @@ export const calculateBlueprint = async (
           name: "roboport",
           position: { x: entityX + 3, y: entityY + 3 },
         } as FactorioEntity);
+      }
+
+      switch (type) {
+        case "accumulator":
+          for (let yi = 0; yi < 3; yi++) {
+            for (let xi = 0; xi < 3; xi++) {
+              if (needsPowerPole && yi === 0 && xi === 0) {
+                continue;
+              }
+
+              if (needsRoboPort && yi > 0 && xi > 0) {
+                continue;
+              }
+
+              blueprint.blueprint.entities.push({
+                entity_number: entity_number++,
+                name: "accumulator",
+                position: { x: entityX + xi * 2, y: entityY + yi * 2 },
+              });
+            }
+          }
+          break;
+        case "solar-panel":
+          if (needsRoboPort && config.tiles) {
+            const tilePositions = needsPowerPole
+              ? tilesWithBoth
+              : tilesWithRoboport;
+            tilePositions.forEach(([x, y]) => {
+              blueprint.blueprint.tiles.push({
+                name: "refined-concrete",
+                position: { x: entityX + x - 1, y: entityY + y - 1 },
+              });
+            });
+          } else {
+            for (let yi = 0; yi < 2; yi++) {
+              for (let xi = 0; xi < 2; xi++) {
+                if (yi === 0 && xi === 0 && needsPowerPole) {
+                  if (config.tiles) {
+                    tilesWithSubstation.forEach(([x, y]) => {
+                      blueprint.blueprint.tiles.push({
+                        name: "refined-concrete",
+                        position: { x: entityX + x - 1, y: entityY + y - 1 },
+                      });
+                    });
+                  }
+
+                  continue;
+                }
+
+                blueprint.blueprint.entities.push({
+                  entity_number: entity_number++,
+                  name: "solar-panel",
+                  position: { x: entityX + xi * 3, y: entityY + yi * 3 },
+                });
+              }
+            }
+          }
+          break;
+        case "stone-wall":
+          for (let yi = 0; yi < 6; yi++) {
+            for (let xi = 0; xi < 6; xi++) {
+              if (needsPowerPole && yi < 2 && xi < 2) {
+                continue;
+              }
+
+              if (needsRoboPort && yi > 1 && xi > 1) {
+                continue;
+              }
+
+              blueprint.blueprint.entities.push({
+                entity_number: entity_number++,
+                name: "stone-wall",
+                position: { x: entityX + xi - 1, y: entityY + yi - 1 },
+              });
+            }
+          }
+          break;
       }
     }
   }

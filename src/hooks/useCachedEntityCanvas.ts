@@ -6,7 +6,7 @@ import {
   FactorioPosition,
   FactorioTile,
   TileType,
-} from "../types/types";
+} from "../types/factorio";
 
 export const useCachedEntityCanvas = (
   entities: FactorioEntity[] | FactorioTile[],
@@ -31,8 +31,6 @@ export const useCachedEntityCanvas = (
           : type === "stone-wall" || type === "refined-concrete"
           ? 1
           : 0;
-
-      console.log(type, filteredEntities.length);
 
       if (context) {
         context.clearRect(0, 0, canvas.width, canvas.height);

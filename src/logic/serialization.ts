@@ -1,5 +1,5 @@
 import { deflate, inflate } from "pako";
-import { FactorioBlueprint } from "../types/types";
+import { FactorioBlueprint } from "../types/factorio";
 
 const VERSION = "0";
 const UINT_CHUNK_SIZE = 65536;

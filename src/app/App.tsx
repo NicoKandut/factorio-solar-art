@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import { Button } from "../components/button/Button";
+import Header from "../components/header/Header";
 import { Preview } from "../components/preview/Preview";
 import { Section } from "../components/section/Section";
 import { Settings } from "../components/settings/Settings";
@@ -8,10 +10,9 @@ import { useBlueprintCalculation } from "../hooks/useBlueprintCalculation";
 import { useBlueprintSerializer } from "../hooks/useBlueprintSerializer";
 import { useImageLoader } from "../hooks/useImageLoader";
 import { combine } from "../logic/classnames";
-import { Config, FactorioBlueprint } from "../types/types";
+import { FactorioBlueprint } from "../types/factorio";
+import { Config, Theme } from "../types/ui";
 import "./App.css";
-
-type Theme = "dark" | "light";
 
 const initialConfig: Config = {
   scale: 6,
@@ -26,10 +27,8 @@ const initialConfig: Config = {
 export const App = () => {
   const imageRef = useRef<HTMLImageElement>(null);
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [theme, setTheme] = useState<Theme>("dark");
   const [config, setConfig] = useState(initialConfig);
-
   const [file, setFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState("");
   const [size, setSize] = useState({ width: 0, height: 0 });
@@ -42,10 +41,7 @@ export const App = () => {
 
   return (
     <div className={combine("app", theme)}>
-      <header className="app-header">
-        <span className="material-icons">light_mode</span>
-        <h1>Factorio Solar Art Generator</h1>
-      </header>
+      <Header theme={theme} setTheme={setTheme} />
       <div className="app-content">
         <Section className="area-settings">
           <>

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { calculateBlueprint } from "../../logic/calculator";
-import { Config, FactorioBlueprint } from "../../types/types";
+import { Config } from "../../types/ui";
 import { Preview } from "../preview/Preview";
 import { encode } from "../../logic/serialization";
 import "./Display.css";
 import { CopyButton } from "../copybutton/CopyButton";
 import { Button } from "../button/Button";
+import { FactorioBlueprint } from "../../types/factorio";
 
 interface Props {
   file: File | null;

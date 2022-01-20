@@ -1,5 +1,5 @@
 import { shorten } from "../../logic/numberformatting";
-import { EntityType, TileType } from "../../types/types";
+import { EntityType, TileType } from "../../types/factorio";
 import "./Item.css";
 
 type Items = EntityType | TileType;
