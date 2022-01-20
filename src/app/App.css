@@ -43,9 +43,10 @@
   flex-grow: 1;
   display: grid;
   grid-template-columns: auto 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto auto;
   grid-template-areas:
     "settings source preview"
+    "statistics source preview"
     "statistics code code";
   padding: var(--spacing-grid);
   gap: var(--spacing-grid);
