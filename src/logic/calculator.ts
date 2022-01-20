@@ -74,7 +74,7 @@ const mapColor = (
 
   return isTransparent
     ? "transparent"
-    : brightness > 0.9
+    : config.walls && brightness > 0.9
     ? "stone-wall"
     : brightness > config.threshold
     ? "accumulator"
@@ -130,7 +130,8 @@ export const calculateBlueprint = async (
       }
 
       const needsPowerPole = (fileX + 2) % 3 === 0 && (fileY + 2) % 3 === 0;
-      const needsRoboPort = (fileX + 1) % 9 === 0 && (fileY + 1) % 9 === 0;
+      const needsRoboPort =
+        config.roboports && (fileX + 1) % 9 === 0 && (fileY + 1) % 9 === 0;
 
       const entityX = scaledX - halfWidth;
       const entityY = scaledY - halfHeight;

@@ -3,6 +3,7 @@ import {
   entityColors,
   EntityType,
   FactorioEntity,
+  FactorioPosition,
   FactorioTile,
   TileType,
 } from "../types/types";
@@ -16,7 +17,9 @@ export const useCachedEntityCanvas = (
   onComplete?: () => void
 ) => {
   const filteredEntities = useMemo(() => {
-    return entities.filter((e) => e.name === type);
+    return (entities as { name: string; position: FactorioPosition }[]).filter(
+      (e) => e.name === type
+    );
   }, [entities, type]);
 
   useEffect(() => {

@@ -33,7 +33,7 @@ export interface FactorioEntity {
 }
 
 export interface FactorioTile {
-  name: string;
+  name: TileType;
   position: FactorioPosition;
 }
 

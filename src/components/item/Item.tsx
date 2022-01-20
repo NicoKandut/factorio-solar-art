@@ -18,6 +18,9 @@ const itemUrls: Partial<Record<Items, string>> = {
     "https://wiki.factorio.com/images/thumb/Substation.png/32px-Substation.png",
   roboport:
     "https://wiki.factorio.com/images/thumb/Roboport.png/32px-Roboport.png",
+  "stone-wall": "https://wiki.factorio.com/images/thumb/Wall.png/32px-Wall.png",
+  "concrete-reinforced":
+    "https://wiki.factorio.com/images/thumb/Refined_concrete.png/32px-Refined_concrete.png",
 };
 
 export const Item = (props: Props) => {

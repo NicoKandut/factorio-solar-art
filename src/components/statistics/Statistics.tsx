@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { EntityType, FactorioBlueprint } from "../../types/types";
+import { EntityType, FactorioBlueprint, TileType } from "../../types/types";
 import { Item } from "../item/Item";
 import "./Statistics.css";
 
@@ -14,7 +14,10 @@ export const Statistics = (props: Props) => {
 
   const statistics = useMemo(() => {
     if (blueprint) {
-      return blueprint.blueprint.entities.reduce(
+      return [
+        ...blueprint.blueprint.entities,
+        ...blueprint.blueprint.tiles,
+      ].reduce(
         (acc, entity) => {
           acc[entity.name]++;
           return acc;
@@ -24,7 +27,9 @@ export const Statistics = (props: Props) => {
           accumulator: 0,
           substation: 0,
           roboport: 0,
-        } as Record<EntityType, number>
+          "stone-wall": 0,
+          "concrete-reinforced": 0,
+        } as Record<EntityType | TileType, number>
       );
     }
   }, [blueprint]);
