@@ -22,14 +22,17 @@ export const useCachedEntityCanvas = (
   useEffect(() => {
     if (canvas && filteredEntities) {
       const context = canvas.getContext("2d");
+      const additionalOffset = type === "roboport" ? -1 : 0;
+
+      console.log(type, filteredEntities.length);
 
       if (context) {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = entityColors[type];
         filteredEntities.forEach((e) => {
           context.fillRect(
-            e.position.x + offset.x,
-            e.position.y + offset.y,
+            e.position.x + offset.x + additionalOffset,
+            e.position.y + offset.y + additionalOffset,
             size,
             size
           );

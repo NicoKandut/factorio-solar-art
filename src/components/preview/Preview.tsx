@@ -18,7 +18,8 @@ export const Preview = (props: Props) => {
   const accumulatorRef = useRef<HTMLCanvasElement>(null);
   const powerpolesRef = useRef<HTMLCanvasElement>(null);
   const roboportsRef = useRef<HTMLCanvasElement>(null);
-  const tilesRef = useRef<HTMLCanvasElement>(null);
+  const concreteReinforcedRef = useRef<HTMLCanvasElement>(null);
+  const wallsRef = useRef<HTMLCanvasElement>(null);
 
   const offset = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
 
@@ -44,7 +45,14 @@ export const Preview = (props: Props) => {
     offset
   );
   useCachedEntityCanvas(entities, roboportsRef.current, "roboport", 4, offset);
-  useCachedEntityCanvas(tiles, tilesRef.current, "roboport", 4, offset);
+  useCachedEntityCanvas(
+    tiles,
+    concreteReinforcedRef.current,
+    "concrete-reinforced",
+    1,
+    offset
+  );
+  useCachedEntityCanvas(entities, wallsRef.current, "stone-wall", 1, offset);
 
   return (
     <div className="stage">
@@ -72,7 +80,18 @@ export const Preview = (props: Props) => {
         width={width}
         height={height}
       />
-      <canvas ref={tilesRef} className="tiles" width={width} height={height} />
+      <canvas
+        ref={concreteReinforcedRef}
+        className="concrete-reinforced"
+        width={width}
+        height={height}
+      />
+      <canvas
+        ref={wallsRef}
+        className="stone-wall"
+        width={width}
+        height={height}
+      />
     </div>
   );
 };

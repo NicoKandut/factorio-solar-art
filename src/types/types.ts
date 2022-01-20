@@ -4,6 +4,9 @@ export interface Config {
   threshold: number;
   transparency: boolean;
   roboports: boolean;
+  tiles: boolean;
+  walls: boolean;
+
   name: string;
 }
 
@@ -27,8 +30,6 @@ export interface FactorioEntity {
   entity_number: number;
   name: EntityType;
   position: FactorioPosition;
-
-  control_behavior: any;
 }
 
 export interface FactorioTile {
@@ -63,7 +64,8 @@ export type EntityType =
   | "substation"
   | "roboport"
   | "solar-panel"
-  | "accumulator";
+  | "accumulator"
+  | "stone-wall";
 
 export type TileType = "stone-path" | "concrete" | "concrete-reinforced";
 
@@ -79,8 +81,9 @@ export const entityColors: Record<ExtendedEntityType, string> = {
   substation: "rgb(0, 93, 148)",
   roboport: "rgb(214, 206, 132)",
   "stone-path": "rgb(0, 0, 0)",
-  concrete: "rgb(0, 0, 0)",
-  "concrete-reinforced": "rgb(0, 0, 0)",
+  concrete: "rgb(59, 61, 58)",
+  "concrete-reinforced": "rgb(49, 50, 42)",
   ground: "rgb(140, 105, 58)",
   transparent: "transparent",
+  "stone-wall": "rgb(217, 216, 207)",
 };

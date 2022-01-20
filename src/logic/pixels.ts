@@ -12,6 +12,7 @@ const sizes: Record<EntityType, number> = {
   "solar-panel": 3,
   roboport: 4,
   substation: 2,
+  "stone-wall": 1,
 };
 
 export const solar = (params: Params) => {};

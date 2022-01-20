@@ -16,8 +16,10 @@ type Theme = "dark" | "light";
 const initialConfig: Config = {
   scale: 6,
   threshold: 0.5,
-  transparency: false,
+  transparency: true,
   roboports: true,
+  tiles: true,
+  walls: true,
   name: "My Solar Pixel Art",
 };
 

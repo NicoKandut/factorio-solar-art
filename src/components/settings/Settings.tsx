@@ -13,11 +13,29 @@ export const Settings = (props: Props) => {
 
   return (
     <>
+      <Textbox
+        value={config.name}
+        setValue={(v) => setConfig({ ...config, name: v })}
+      >
+        <span>Name</span>
+      </Textbox>
       <Checkbox
         value={config.transparency}
         setValue={(v) => setConfig({ ...config, transparency: v })}
       >
         <span>Transparency</span>
+      </Checkbox>
+      <Checkbox
+        value={config.tiles}
+        setValue={(v) => setConfig({ ...config, tiles: v })}
+      >
+        <span>Use tiles</span>
+      </Checkbox>
+      <Checkbox
+        value={config.walls}
+        setValue={(v) => setConfig({ ...config, walls: v })}
+      >
+        <span>Use walls</span>
       </Checkbox>
       <Slider
         min={0}
@@ -34,12 +52,7 @@ export const Settings = (props: Props) => {
       >
         <span>Use roboports</span>
       </Checkbox>
-      <Textbox
-        value={config.name}
-        setValue={(v) => setConfig({ ...config, name: v })}
-      >
-        <span>Name</span>
-      </Textbox>
+
       <button onClick={() => setConfig({ ...config })}>Recalculate</button>
     </>
   );
