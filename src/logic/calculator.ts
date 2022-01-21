@@ -1,8 +1,4 @@
-import {
-  EntityType,
-  FactorioBlueprint,
-  FactorioEntity,
-} from "../types/factorio";
+import { FactorioBlueprint, FactorioEntity } from "../types/factorio";
 import { Config } from "../types/ui";
 
 type PixelType = "stone-wall" | "accumulator" | "solar-panel" | "transparent";
