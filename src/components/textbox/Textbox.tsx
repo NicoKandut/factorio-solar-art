@@ -1,21 +1,24 @@
 import { PropsWithChildren } from "react";
+import "./Textbox.css";
 
 interface Props {
   value: string;
   setValue: (value: string) => void;
+  hint: string;
 }
 
 export const Textbox = (props: PropsWithChildren<Props>) => {
-  const { value, setValue, children } = props;
+  const { value, setValue, children, hint } = props;
 
   return (
-    <div>
+    <div className="textbox" title={hint}>
+      {children}
       <input
         type="text"
+        className="textbox-input"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      {children}
     </div>
   );
 };

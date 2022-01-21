@@ -1,10 +1,5 @@
-.checkbox {
+.slider {
   display: flex;
   align-items: center;
   gap: var(--spacing-inline);
-}
-
-.checkbox-input {
-  /* reset */
-  margin: 0;
 }

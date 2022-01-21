@@ -39,6 +39,9 @@ export const useImageLoader = (
       curImage.addEventListener("load", listener);
 
       return () => curImage.removeEventListener("load", listener);
+    } else {
+      setSrc("");
+      setSize({ width: 0, height: 0 });
     }
   }, [file, imageRef, setSize, setSrc]);
 };

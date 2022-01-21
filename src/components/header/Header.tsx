@@ -14,7 +14,7 @@ const Header = (props: Props) => {
   return (
     <header className="app-header">
       <Item name={"solar-panel"} count={17} />
-      <h1>Factorio Solar Art Generator</h1>
+      <h1 className="title">Factorio Solar Art Generator</h1>
       <div className="spacer"></div>
       {theme === "dark" ? (
         <Button onClick={() => setTheme("light")}>🌞</Button>

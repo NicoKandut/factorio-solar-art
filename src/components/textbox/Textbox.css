@@ -1,0 +1,18 @@
+.textbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.textbox-input {
+  /* reset */
+  color: inherit;
+  border: none;
+
+  /* layout */
+  padding: var(--spacing-inline);
+  border-radius: var(--button-rounding);
+
+  /* theming */
+  background-color: var(--layer-color);
+}

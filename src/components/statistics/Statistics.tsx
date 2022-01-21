@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { watts } from "../../logic/numberformatting";
 import { EntityType, FactorioBlueprint, TileType } from "../../types/factorio";
 import { Item } from "../item/Item";
 import "./Statistics.css";
@@ -47,29 +48,41 @@ export const Statistics = (props: Props) => {
 
   return (
     <div>
+      <h3 className="statistics-group-title">Items</h3>
       <span>
         {entityCount || "no"} entities, {tileCount || "no"} tiles
       </span>
       <div className="item-list">
-        {Object.entries(statistics).map(([key, value]) => (
-          <Item key={key} name={key as EntityType} count={value} />
-        ))}
+        {Object.entries(statistics).map(
+          ([key, value]) =>
+            Boolean(value) && (
+              <Item key={key} name={key as EntityType} count={value} />
+            )
+        )}
       </div>
-      <div>
-        <span>{statistics["solar-panel"] * 60} kW (peak)</span>
-        <br />
-        <span>{statistics["solar-panel"] * 42} kW (avg)</span>
-      </div>
-      <div>
-        <span>
-          Ratio {ratio} ({perfectRatio} is optimal)
-        </span>
-        <br />
-        <span>
-          You need more {ratio > perfectRatio ? "solar panels" : "accumulators"}
-          .
-        </span>
-      </div>
+      <h3 className="statistics-group-title">Power</h3>
+      <span>
+        {watts(statistics["solar-panel"] * 60e3)} (peak) from solar panels
+      </span>
+      <br />
+      <span>
+        {watts(statistics["solar-panel"] * 42e3)} (avg) from solar panels
+      </span>
+
+      <br />
+      <span title="Assuming that they are all fully charged by nightfall.">
+        {watts((statistics["accumulator"] / 20) * 1e6)} from accumulators at
+        night
+      </span>
+
+      <h3 className="statistics-group-title">Balance</h3>
+      <span>
+        Ratio {ratio} ({perfectRatio} is optimal)
+      </span>
+      <br />
+      <span>
+        You need more {ratio > perfectRatio ? "solar panels" : "accumulators"}.
+      </span>
     </div>
   );
 };

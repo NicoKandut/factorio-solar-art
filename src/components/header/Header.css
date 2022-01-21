@@ -1,3 +1,16 @@
+.app-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-grid);
+  padding: var(--spacing-grid);
+  background-color: var(--layer-color);
+}
+
+.title {
+  font-weight: normal;
+}
+
 .spacer {
   flex-grow: 1;
 }

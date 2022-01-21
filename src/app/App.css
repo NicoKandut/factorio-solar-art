@@ -70,15 +70,6 @@
   --error: #ca4f4f;
 }
 
-.app-header {
-  grid-area: header;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-grid);
-  padding: var(--spacing-grid);
-  background-color: var(--layer-color);
-}
-
 .area-settings {
   grid-area: settings;
 }

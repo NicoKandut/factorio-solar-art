@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Button } from "../components/button/Button";
+import { CopyButton } from "../components/copybutton/CopyButton";
 import Header from "../components/header/Header";
 import { Preview } from "../components/preview/Preview";
 import { Section } from "../components/section/Section";
@@ -21,7 +22,13 @@ const initialConfig: Config = {
   roboports: true,
   tiles: true,
   walls: true,
-  name: "My Solar Pixel Art",
+  name: "My Blueprint",
+};
+
+const copyButtonIcons = {
+  success: <span className="icon success material-icons">check_circle</span>,
+  error: <span className="icon error material-icons">error</span>,
+  default: <span className="icon material-icons">content_copy</span>,
 };
 
 export const App = () => {
@@ -55,6 +62,12 @@ export const App = () => {
           <>
             <span className="material-icons">create</span>
             <span>Source</span>
+            {file && (
+              <Button className="clear-button" onClick={() => setFile(null)}>
+                <span className="material-icons">clear</span>
+                <span>Clear</span>
+              </Button>
+            )}
           </>
           {file ? (
             <img
@@ -72,6 +85,12 @@ export const App = () => {
           <>
             <span className="material-icons">auto_fix_high</span>
             <span>Preview</span>
+            {file && (
+              <Button onClick={() => setConfig({ ...config })}>
+                <span className="material-icons">replay</span>
+                <span>Recalculate</span>
+              </Button>
+            )}
           </>
           <Preview
             entities={blueprint?.blueprint?.entities || []}
@@ -93,6 +112,9 @@ export const App = () => {
           <>
             <span className="material-icons">code</span>
             <span>Code</span>
+            <CopyButton text={importableText} icons={copyButtonIcons}>
+              <span>Copy blueprint</span>
+            </CopyButton>
           </>
           <textarea className="code-area" value={importableText} readOnly />
         </Section>

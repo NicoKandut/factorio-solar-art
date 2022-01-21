@@ -4,3 +4,8 @@
   padding: var(--spacing-inline);
   gap: var(--spacing-inline);
 }
+
+.statistics-group-title {
+  /* reset */
+  margin: 0;
+}

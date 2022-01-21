@@ -6,22 +6,24 @@ interface Props {
   max: number;
   step: number;
   setValue: (value: number) => void;
+  hint: string;
 }
 
 export const Slider = (props: PropsWithChildren<Props>) => {
-  const { value, setValue, min, max, step, children } = props;
+  const { value, setValue, min, max, step, children, hint } = props;
 
   return (
-    <div>
+    <div className="slider" title={hint}>
+      {children}
       <input
         type="range"
+        className="slider-input"
         value={value}
         min={min}
         max={max}
         step={step}
         onChange={(e) => setValue(Number(e.target.value))}
       />
-      {children}
     </div>
   );
 };

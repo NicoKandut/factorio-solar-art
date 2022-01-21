@@ -8,6 +8,7 @@
   /* layout */
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-inline);
   padding: var(--spacing-inline);
 
