@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Button } from "../components/button/Button";
 import { CopyButton } from "../components/copybutton/CopyButton";
 import Header from "../components/header/Header";
+import { CenteredLoader } from "../components/loader/Loader";
 import { Preview } from "../components/preview/Preview";
 import { Section } from "../components/section/Section";
 import { Settings } from "../components/settings/Settings";
@@ -41,7 +42,6 @@ export const App = () => {
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [blueprint, setBlueprint] = useState<FactorioBlueprint | null>(null);
   const [importableText, setImportableText] = useState("");
-
   useImageLoader(imageRef, file, setImageSrc, setSize);
   useBlueprintCalculation(imageRef, size, config, setBlueprint);
   useBlueprintSerializer(blueprint, setImportableText);
@@ -63,7 +63,16 @@ export const App = () => {
             <span className="material-icons">create</span>
             <span>Source</span>
             {file && (
-              <Button className="clear-button" onClick={() => setFile(null)}>
+              <Button
+                className="clear-button"
+                onClick={() => {
+                  setFile(null);
+                  setImageSrc("");
+                  setSize({ width: 0, height: 0 });
+                  setBlueprint(null);
+                  setImportableText("");
+                }}
+              >
                 <span className="material-icons">clear</span>
                 <span>Clear</span>
               </Button>
@@ -92,12 +101,16 @@ export const App = () => {
               </Button>
             )}
           </>
-          <Preview
-            entities={blueprint?.blueprint?.entities || []}
-            tiles={blueprint?.blueprint.tiles || []}
-            width={size.width * config.scale}
-            height={size.height * config.scale}
-          />
+          {file && !blueprint ? (
+            <CenteredLoader />
+          ) : (
+            <Preview
+              entities={blueprint?.blueprint?.entities || []}
+              tiles={blueprint?.blueprint.tiles || []}
+              width={size.width * config.scale}
+              height={size.height * config.scale}
+            />
+          )}
         </Section>
 
         <Section className="area-statistics">
@@ -116,7 +129,11 @@ export const App = () => {
               <span>Copy blueprint</span>
             </CopyButton>
           </>
-          <textarea className="code-area" value={importableText} readOnly />
+          {file && !importableText ? (
+            <CenteredLoader />
+          ) : (
+            <textarea className="code-area" value={importableText} readOnly />
+          )}
         </Section>
       </div>
     </div>
