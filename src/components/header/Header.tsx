@@ -1,26 +1,12 @@
-import { Theme } from "../../types/ui";
-import { Button } from "../button/Button";
+import { combine } from "../../logic/classnames";
 import { Item } from "../item/Item";
 import "./Header.css";
 
-interface Props {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-}
-
-const Header = (props: Props) => {
-  const { theme, setTheme } = props;
-
+const Header = ({ className }: { className?: string }) => {
   return (
-    <header className="app-header">
+    <header className={combine("app-header", className)}>
       <Item name={"solar-panel"} count={17} />
       <h1 className="title">Factorio Solar Art Generator</h1>
-      <div className="spacer"></div>
-      {theme === "dark" ? (
-        <Button onClick={() => setTheme("light")}>🌞</Button>
-      ) : (
-        <Button onClick={() => setTheme("dark")}>🌙</Button>
-      )}
     </header>
   );
 };

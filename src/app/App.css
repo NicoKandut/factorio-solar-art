@@ -1,5 +1,5 @@
 .app {
-  /* variables */
+  /* sizes */
   --spacing-inline: 0.5rem;
   --spacing-grid: 1rem;
   --button-rounding: 3px;
@@ -8,18 +8,43 @@
   --inline-icon-size: 24px;
   --line-strength: 1px;
 
+  /* colors */
+  --bg-color: #232323;
+  --text-color: white;
+  --section-color: #313031;
+  --inset-color: #414040;
+  --weird-cream: #ffe6c0;
+  --accent-color: #e39827;
+  --info: #80cdee;
+  --positive: #5eb663;
+  --negative: #fd5959;
+
+  /* shadow */
+  --shadow-cutout: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000,
+    -2px 0 2px -2px #0f0d0c, 2px 0 2px -2px #0f0d0c, 0 2px 2px -2px #ebe6e4;
+  --shadow-edge: inset 3px 0 2px -2px #201815, inset 0 3px 2px -2px #8f8c8b,
+    inset -3px 0 2px -2px #201815, inset 0 -3px 3px -3px #000, 0 0 3px 0 #201815;
+
   /* size */
   height: 100vh;
   max-width: 100vw;
   max-height: 100vh;
 
   /* layout */
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "settings source preview"
+    "statistics source preview"
+    "statistics code code";
+  padding: var(--spacing-grid);
+  gap: var(--spacing-grid);
+  box-sizing: border-box;
 
   /* theming */
   background-color: var(--bg-color);
-  transition: background-color var(--transition-time-long) ease-out;
   color: var(--text-color);
 }
 
@@ -40,34 +65,8 @@
   background-color: transparent;
 }
 
-.app-content {
-  /* layout */
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    "settings source preview"
-    "statistics source preview"
-    "statistics code code";
-  padding: var(--spacing-grid);
-  gap: var(--spacing-grid);
-}
-
-.dark {
-  --bg-color: black;
-  --text-color: #808080;
-  --layer-color: #121212;
-  --success: #55b355;
-  --error: #ca4f4f;
-}
-
-.light {
-  --bg-color: white;
-  --text-color: black;
-  --layer-color: #e6e6e6;
-  --success: #55b355;
-  --error: #ca4f4f;
+.area-header {
+  grid-area: header;
 }
 
 .area-settings {
@@ -104,7 +103,10 @@
 .source-image {
   height: 100%;
   width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
-  max-height: 60vh;
+  background-color: rgb(140, 105, 58);
+  border-radius: var(--button-rounding);
 }

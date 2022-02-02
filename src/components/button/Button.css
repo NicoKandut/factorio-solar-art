@@ -3,8 +3,6 @@
   border: none;
   cursor: pointer;
   color: inherit;
-  font-size: medium;
-
   /* layout */
   display: inline-flex;
   align-items: center;
@@ -13,9 +11,18 @@
   padding: var(--spacing-inline);
 
   /* theming */
-  border-radius: var(--button-rounding);
-  background-color: var(--layer-color);
+  height: 24px;
+  width: 24px;
+  color: white;
+
+  background-color: var(--section-color);
   transition: filter var(--transition-time) ease-out;
+
+  box-shadow: var(--shadow-edge);
+}
+
+.button span {
+  font-size: 16px;
 }
 
 .button:hover {

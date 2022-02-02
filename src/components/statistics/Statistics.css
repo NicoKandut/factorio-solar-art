@@ -1,3 +1,7 @@
+.statistics {
+  overflow-y: scroll;
+}
+
 .item-list {
   display: flex;
   flex-wrap: wrap;
@@ -8,4 +12,5 @@
 .statistics-group-title {
   /* reset */
   margin: 0;
+  font-size: 14px;
 }

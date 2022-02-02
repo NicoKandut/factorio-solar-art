@@ -15,6 +15,7 @@ export const UploadArea = (props: Props) => {
   return (
     <div
       className="upload-area"
+      onClick={() => fileInputRef.current?.click()}
       onDrop={(event) => {
         event.preventDefault();
         if (event.dataTransfer.files[0]) {
@@ -26,14 +27,8 @@ export const UploadArea = (props: Props) => {
       }}
     >
       <span className="material-icons upload-icon">upload</span>
-      <span>
-        <Button
-          className="upload-button"
-          onClick={() => fileInputRef.current?.click()}
-        >
-          Upload a picture
-        </Button>{" "}
-        or drag and drop a picture here
+      <span className="upload-hint">
+        Click here to upload a picture or drag and drop a picture here
       </span>
       <HiddenFileInput
         inputRef={fileInputRef}

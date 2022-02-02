@@ -35,7 +35,6 @@ const copyButtonIcons = {
 export const App = () => {
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const [theme, setTheme] = useState<Theme>("dark");
   const [config, setConfig] = useState(initialConfig);
   const [file, setFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState("");
@@ -47,95 +46,76 @@ export const App = () => {
   useBlueprintSerializer(blueprint, setImportableText);
 
   return (
-    <div className={combine("app", theme)}>
-      <Header theme={theme} setTheme={setTheme} />
-      <div className="app-content">
-        <Section className="area-settings">
-          <>
-            <span className="material-icons">settings</span>
-            <span>Settings</span>
-          </>
-          <Settings config={config} setConfig={setConfig} />
-        </Section>
+    <div className="app">
+      <Header className="area-header" />
+      <Section className="area-settings">
+        <span>Settings</span>
+        <Settings config={config} setConfig={setConfig} />
+      </Section>
 
-        <Section className="area-source">
-          <>
-            <span className="material-icons">create</span>
-            <span>Source</span>
-            {file && (
-              <Button
-                className="clear-button"
-                onClick={() => {
-                  setFile(null);
-                  setImageSrc("");
-                  setSize({ width: 0, height: 0 });
-                  setBlueprint(null);
-                  setImportableText("");
-                }}
-              >
-                <span className="material-icons">clear</span>
-                <span>Clear</span>
-              </Button>
-            )}
-          </>
-          {file ? (
-            <img
-              ref={imageRef}
-              src={imageSrc}
-              alt="source"
-              className="source-image"
-            />
-          ) : (
-            <UploadArea setFile={setFile} />
-          )}
-        </Section>
+      <Section className="area-source">
+        <span>Source</span>
+        {file && (
+          <Button
+            className="clear-button"
+            onClick={() => {
+              setFile(null);
+              setImageSrc("");
+              setSize({ width: 0, height: 0 });
+              setBlueprint(null);
+              setImportableText("");
+            }}
+          >
+            <span className="material-icons">clear</span>
+          </Button>
+        )}
+        {file ? (
+          <img
+            ref={imageRef}
+            src={imageSrc}
+            alt="source"
+            className="source-image"
+          />
+        ) : (
+          <UploadArea setFile={setFile} />
+        )}
+      </Section>
 
-        <Section className="area-preview">
-          <>
-            <span className="material-icons">auto_fix_high</span>
-            <span>Preview</span>
-            {file && (
-              <Button onClick={() => setConfig({ ...config })}>
-                <span className="material-icons">replay</span>
-                <span>Recalculate</span>
-              </Button>
-            )}
-          </>
-          {file && !blueprint ? (
-            <CenteredLoader />
-          ) : (
-            <Preview
-              entities={blueprint?.blueprint?.entities || []}
-              tiles={blueprint?.blueprint.tiles || []}
-              width={size.width * config.scale}
-              height={size.height * config.scale}
-            />
-          )}
-        </Section>
+      <Section className="area-preview">
+        <span>Preview</span>
+        {file && (
+          <Button onClick={() => setConfig({ ...config })}>
+            <span className="material-icons">replay</span>
+          </Button>
+        )}
 
-        <Section className="area-statistics">
-          <>
-            <span className="material-icons">bar_chart</span>
-            <span>Statistics</span>
-          </>
-          <Statistics blueprint={blueprint} />
-        </Section>
+        {file && !blueprint ? (
+          <CenteredLoader />
+        ) : (
+          <Preview
+            entities={blueprint?.blueprint?.entities || []}
+            tiles={blueprint?.blueprint.tiles || []}
+            width={size.width * config.scale}
+            height={size.height * config.scale}
+          />
+        )}
+      </Section>
 
-        <Section className="area-code">
-          <>
-            <span className="material-icons">code</span>
-            <span>Code</span>
-            <CopyButton text={importableText} icons={copyButtonIcons}>
-              <span>Copy blueprint</span>
-            </CopyButton>
-          </>
-          {file && !importableText ? (
-            <CenteredLoader />
-          ) : (
-            <textarea className="code-area" value={importableText} readOnly />
-          )}
-        </Section>
-      </div>
+      <Section className="area-statistics">
+        <span>Statistics</span>
+
+        <Statistics blueprint={blueprint} />
+      </Section>
+
+      <Section className="area-code">
+        <span>Code</span>
+        <CopyButton text={importableText} icons={copyButtonIcons} />
+        {file && !importableText ? (
+          <CenteredLoader />
+        ) : (
+          <textarea className="code-area" value={importableText} readOnly />
+        )}
+      </Section>
     </div>
   );
 };

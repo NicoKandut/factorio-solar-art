@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import "./Slider.css";
 
 interface Props {
   value: number;

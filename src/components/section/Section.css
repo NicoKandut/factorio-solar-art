@@ -1,7 +1,11 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-inline);
+  gap: 12px;
+
+  background-color: var(--section-color);
+  padding: 12px;
+  box-shadow: var(--shadow-edge);
 }
 
 .section-title {
@@ -10,14 +14,33 @@
 
   /* layout */
   display: flex;
+  width: 100%;
   align-items: center;
   gap: var(--spacing-inline);
-  padding-block: var(--spacing-inline);
+  height: 24px;
 
   /* theming */
-  border-bottom: solid var(--line-strength) var(--text-color);
+  font-size: 19px;
+  color: var(--weird-cream);
+}
+
+.section-spacer {
+  flex-grow: 1;
+  background-image: linear-gradient(
+    to right,
+    var(--inset-color),
+    var(--inset-color) 2px,
+    transparent 2px,
+    transparent
+  );
+  background-size: 4px 100%;
+  height: 100%;
 }
 
 .section-content {
   height: 100%;
+  background-color: var(--inset-color);
+  box-shadow: var(--shadow-cutout);
+  padding: 12px;
+  overflow: hidden;
 }

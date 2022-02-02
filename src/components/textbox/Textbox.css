@@ -6,7 +6,7 @@
 
 .textbox-input {
   /* reset */
-  color: inherit;
+  color: black;
   border: none;
 
   /* layout */
@@ -14,5 +14,6 @@
   border-radius: var(--button-rounding);
 
   /* theming */
-  background-color: var(--layer-color);
+  background-color: var(--weird-cream);
+  box-shadow: var(--shadow-cutout);
 }

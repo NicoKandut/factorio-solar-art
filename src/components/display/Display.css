@@ -15,11 +15,11 @@
 }
 
 .success {
-  color: var(--success);
+  color: var(--positive);
 }
 
 .error {
-  color: var(--error);
+  color: var(--negative);
 }
 
 .inline-flex {

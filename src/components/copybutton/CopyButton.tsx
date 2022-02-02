@@ -20,8 +20,8 @@ interface Props {
   className?: string;
 }
 
-export const CopyButton = (props: PropsWithChildren<Props>) => {
-  const { children, text, icons, className = "" } = props;
+export const CopyButton = (props: Props) => {
+  const { text, icons, className = "" } = props;
 
   const [state, setState] = useState<"default" | "success" | "error">(
     "default"
@@ -46,7 +46,6 @@ export const CopyButton = (props: PropsWithChildren<Props>) => {
       }}
     >
       {icons[state]}
-      {children}
     </Button>
   );
 };

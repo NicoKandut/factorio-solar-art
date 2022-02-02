@@ -137,9 +137,7 @@ export const Display = (props: Props) => {
           <span className="material-icons">code</span>
           <span>Code</span>
         </span>
-        <CopyButton text={json} icons={copyButtonIcons}>
-          <span>Copy blueprint</span>
-        </CopyButton>
+        <CopyButton text={json} icons={copyButtonIcons} />
       </div>
       <div className="code">
         <textarea className="code-area" value={json} readOnly />

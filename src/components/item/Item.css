@@ -9,6 +9,8 @@
   bottom: 0;
   right: 0;
   font-size: 10px;
-  color: white;
   font-weight: bold;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }

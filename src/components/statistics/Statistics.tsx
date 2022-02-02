@@ -47,7 +47,7 @@ export const Statistics = (props: Props) => {
   );
 
   return (
-    <div>
+    <div className="statistics">
       <h3 className="statistics-group-title">Items</h3>
       <span>
         {entityCount || "no"} entities, {tileCount || "no"} tiles

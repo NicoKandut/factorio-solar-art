@@ -4,7 +4,6 @@
   height: 100%;
   background-color: rgb(140, 105, 58);
   border-radius: var(--button-rounding);
-  max-height: 60vh;
 }
 
 .solarpanels,

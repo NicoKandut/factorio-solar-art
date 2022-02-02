@@ -5,6 +5,7 @@
 }
 
 .checkbox-input {
-  /* reset */
-  margin: 0;
+  cursor: pointer;
+  accent-color: var(--accent-color);
+  box-shadow: var(--shadow-cutout);
 }

@@ -12,13 +12,13 @@ export const Checkbox = (props: PropsWithChildren<Props>) => {
 
   return (
     <div className="checkbox" title={hint}>
-      {children}
       <input
         type="checkbox"
         className="checkbox-input"
         checked={value}
         onChange={() => setValue(!value)}
       />
+      {children}
     </div>
   );
 };
