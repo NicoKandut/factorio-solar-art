@@ -11,9 +11,8 @@ import { UploadArea } from "../components/uploadarea/UploadArea";
 import { useBlueprintCalculation } from "../hooks/useBlueprintCalculation";
 import { useBlueprintSerializer } from "../hooks/useBlueprintSerializer";
 import { useImageLoader } from "../hooks/useImageLoader";
-import { combine } from "../logic/classnames";
 import { FactorioBlueprint } from "../types/factorio";
-import { Config, Theme } from "../types/ui";
+import { Config } from "../types/ui";
 import "./App.css";
 
 const initialConfig: Config = {

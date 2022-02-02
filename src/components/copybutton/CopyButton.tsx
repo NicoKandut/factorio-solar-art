@@ -1,9 +1,4 @@
-import React, {
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { combine } from "../../logic/classnames";
 import { Button } from "../button/Button";
 import "./CopyButton.css";

@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Button } from "../button/Button";
 import { HiddenFileInput } from "../hiddenfileinput/HiddenFileInput";
 import "./UploadArea.css";
 
