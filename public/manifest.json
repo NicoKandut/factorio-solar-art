@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Solar Art Generator",
+  "name": "Factorio Solar Art Generator",
   "icons": [
     {
       "src": "favicon.ico",
