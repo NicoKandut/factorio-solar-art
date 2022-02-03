@@ -4,6 +4,7 @@ import { App } from "./app/App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import { onUpdate } from "./logic/update-state";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,5 +13,5 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorkerRegistration.register();
+serviceWorkerRegistration.register({ onUpdate });
 reportWebVitals();

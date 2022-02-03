@@ -123,7 +123,7 @@ export const calculateBlueprint = async (
 
       const needsPowerPole = (fileX + 2) % 3 === 0 && (fileY + 2) % 3 === 0;
       const needsRoboPort =
-        config.roboports && (fileX + 1) % 9 === 0 && (fileY + 1) % 9 === 0;
+        config.roboports && (fileX + 1) % 8 === 0 && (fileY + 1) % 8 === 0;
 
       const entityX = scaledX - halfWidth;
       const entityY = scaledY - halfHeight;
