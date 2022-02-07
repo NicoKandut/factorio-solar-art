@@ -9,14 +9,19 @@
   --line-strength: 1px;
 
   /* colors */
-  --bg-color: #232323;
+  --bg-color: #242324;
   --text-color: white;
   --section-color: #313031;
-  --inset-color: #414040;
+  --inset-color: #403f40;
   --weird-cream: #ffe6c0;
-  --accent-color: #e39827;
+  --accent-color: #ff9f00;
+  --riffle-light: #393839;
+  --riffle-dark: #2b2b2b;
   --info: #80cdee;
   --positive: #5eb663;
+  --good: #7ec762;
+  --fair: #b2dd6d;
+  --bad: #e4ca5a;
   --negative: #fd5959;
 
   /* shadow */
@@ -24,6 +29,8 @@
     -2px 0 2px -2px #0f0d0c, 2px 0 2px -2px #0f0d0c, 0 2px 2px -2px #ebe6e4;
   --shadow-edge: inset 3px 0 2px -2px #201815, inset 0 3px 2px -2px #8f8c8b,
     inset -3px 0 2px -2px #201815, inset 0 -3px 3px -3px #000, 0 0 3px 0 #201815;
+  --shadow-riffle: drop-shadow(0px 1px 1px var(--bg-color));
+  --shadow-elevation: 0 3px 5px 0 #201815;
 
   /* size */
   height: 100vh;
@@ -65,6 +72,7 @@
   background-color: transparent;
 }
 
+/* layout */
 .area-header {
   grid-area: header;
 }

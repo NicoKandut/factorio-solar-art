@@ -1,3 +1,4 @@
+import { combine } from "../../logic/classnames";
 import { shorten } from "../../logic/numberformatting";
 import { EntityType, TileType } from "../../types/factorio";
 import "./Item.css";
@@ -7,6 +8,7 @@ type Items = EntityType | TileType;
 interface Props {
   name: Items;
   count: number;
+  className?: string;
 }
 
 const itemUrls: Partial<Record<Items, string>> = {
@@ -24,10 +26,10 @@ const itemUrls: Partial<Record<Items, string>> = {
 };
 
 export const Item = (props: Props) => {
-  const { count, name } = props;
+  const { count, name, className } = props;
 
   return (
-    <div className="item">
+    <div className={combine("item", className)}>
       <img src={itemUrls[name]} alt={name} className="item-image" />
       <span className="item-count">{shorten(count)}</span>
     </div>

@@ -10,8 +10,13 @@
   display: grid;
   place-content: center;
   place-items: center;
+  opacity: 0.5;
 }
 
 .upload-area:hover {
-  color: white;
+  opacity: 1;
+}
+
+.upload-hint {
+  text-align: center;
 }

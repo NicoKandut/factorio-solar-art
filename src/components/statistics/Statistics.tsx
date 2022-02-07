@@ -8,7 +8,16 @@ interface Props {
   blueprint: FactorioBlueprint | null;
 }
 
-const perfectRatio = (25 / 21).toFixed(2);
+const perfectRatio = 25 / 21;
+
+const ratingOf = (value: number) => {
+  const diff = Math.abs(value - perfectRatio);
+  if (diff < 0.1) return "perfect";
+  if (diff < 0.5) return "good";
+  if (diff < 1) return "fair";
+  if (diff < 5) return "bad";
+  else return "awful";
+};
 
 export const Statistics = (props: Props) => {
   const { blueprint } = props;
@@ -39,50 +48,52 @@ export const Statistics = (props: Props) => {
     return <span>No statistics yet...</span>;
   }
 
-  const entityCount = blueprint.blueprint.entities.length;
-  const tileCount = blueprint.blueprint.tiles.length;
-
-  const ratio = (statistics["accumulator"] / statistics["solar-panel"]).toFixed(
-    2
-  );
+  const ratio = statistics["accumulator"] / statistics["solar-panel"];
 
   return (
     <div className="statistics">
       <h3 className="statistics-group-title">Items</h3>
-      <span>
-        {entityCount || "no"} entities, {tileCount || "no"} tiles
-      </span>
       <div className="item-list">
         {Object.entries(statistics).map(
           ([key, value]) =>
             Boolean(value) && (
-              <Item key={key} name={key as EntityType} count={value} />
+              <div key={key} className="slot">
+                <Item name={key as EntityType} count={value} />
+              </div>
             )
         )}
       </div>
       <h3 className="statistics-group-title">Power</h3>
-      <span>
-        {watts(statistics["solar-panel"] * 60e3)} (peak) from solar panels
-      </span>
-      <br />
-      <span>
-        {watts(statistics["solar-panel"] * 42e3)} (avg) from solar panels
-      </span>
-
-      <br />
-      <span title="Assuming that they are all fully charged by nightfall.">
-        {watts((statistics["accumulator"] / 20) * 1e6)} from accumulators at
-        night
-      </span>
+      <div className="stat-group">
+        <div className="stat-row">
+          <span>Peak output</span>
+          <span>{watts(statistics["solar-panel"] * 60e3)}</span>
+        </div>
+        <div className="stat-row">
+          <span>Average output</span>
+          <span>{watts(statistics["solar-panel"] * 42e3)}</span>
+        </div>
+        <div className="stat-row">
+          <span>At night</span>
+          <span>{watts((statistics["accumulator"] / 20) * 1e6)}</span>
+        </div>
+      </div>
 
       <h3 className="statistics-group-title">Balance</h3>
-      <span>
-        Ratio {ratio} ({perfectRatio} is optimal)
-      </span>
-      <br />
-      <span>
-        You need more {ratio > perfectRatio ? "solar panels" : "accumulators"}.
-      </span>
+      <div className="stat-group">
+        <div className="stat-row">
+          <span>At night</span>
+          <span>{watts((statistics["accumulator"] / 20) * 1e6)}</span>
+        </div>
+        <div className="stat-row">
+          <span>Ratio</span>
+          <span className={ratingOf(ratio)}>{ratio.toFixed(2)} acc/panel</span>
+        </div>
+        <div className="stat-row">
+          <span>Optimal ratio</span>
+          <span>{perfectRatio.toFixed(2)} acc/panel</span>
+        </div>
+      </div>
     </div>
   );
 };

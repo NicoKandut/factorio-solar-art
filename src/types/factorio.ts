@@ -72,8 +72,8 @@ export const sizes: Record<EntityType | TileType, number> = {
 };
 
 export const entityColors: Record<ExtendedEntityType, string> = {
-  accumulator: "rgb(107, 105, 107)",
-  "solar-panel": "rgb(24, 32, 33)",
+  accumulator: "#787A78",
+  "solar-panel": "#182020",
   substation: "rgb(0, 93, 148)",
   roboport: "rgb(214, 206, 132)",
   "stone-path": "rgb(0, 0, 0)",

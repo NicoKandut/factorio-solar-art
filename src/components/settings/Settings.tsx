@@ -57,7 +57,7 @@ export const Settings = (props: Props) => {
         setValue={(v) => setConfig({ ...config, threshold: v })}
         hint="This is the threshold between solar panels and accumulators. Higher values will result in more solar panels."
       >
-        <span>Threshold</span>
+        <span>Contrast</span>
       </Slider>
     </div>
   );
