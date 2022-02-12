@@ -12,6 +12,7 @@
 .header-update {
   color: var(--positive);
   cursor: pointer;
+  flex-grow: 1;
 }
 
 .header-update:hover {

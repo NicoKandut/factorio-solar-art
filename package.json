@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@sentry/react": "^6.17.7",
+    "@sentry/tracing": "^6.17.7",
     "pako": "^2.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
