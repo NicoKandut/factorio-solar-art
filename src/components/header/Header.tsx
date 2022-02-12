@@ -11,7 +11,8 @@ const Header = ({ className }: { className?: string }) => {
       {getUpdateAvailable() ? (
         <span
           className="header-update"
-          onClick={() => window.location.reload()}
+          //@ts-expect-error
+          onClick={() => window.location.reload(true)}
         >
           New version available. Click here to reload.
         </span>
