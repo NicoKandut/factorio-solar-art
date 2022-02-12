@@ -8,7 +8,7 @@ interface Props {
   blueprint: FactorioBlueprint | null;
 }
 
-const perfectRatio = 25 / 21;
+const perfectRatio = 21 / 25;
 
 const ratingOf = (value: number) => {
   const diff = Math.abs(value - perfectRatio);
@@ -81,10 +81,6 @@ export const Statistics = (props: Props) => {
 
       <h3 className="statistics-group-title">Balance</h3>
       <div className="stat-group">
-        <div className="stat-row">
-          <span>At night</span>
-          <span>{watts((statistics["accumulator"] / 20) * 1e6)}</span>
-        </div>
         <div className="stat-row">
           <span>Ratio</span>
           <span className={ratingOf(ratio)}>{ratio.toFixed(2)} acc/panel</span>
