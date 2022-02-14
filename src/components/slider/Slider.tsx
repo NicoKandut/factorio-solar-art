@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 import "./Slider.css";
 
 interface Props {
@@ -13,17 +13,20 @@ interface Props {
 export const Slider = (props: PropsWithChildren<Props>) => {
   const { value, setValue, min, max, step, children, hint } = props;
 
+  const [internalValue, setInternalValue] = useState(value);
+
   return (
     <div className="slider" title={hint}>
       {children}
       <input
         type="range"
         className="slider-input"
-        value={value}
+        value={internalValue}
         min={min}
         max={max}
         step={step}
-        onChange={(e) => setValue(Number(e.target.value))}
+        onChange={(e) => setInternalValue(Number(e.target.value))}
+        onMouseUp={() => setValue(internalValue)}
       />
     </div>
   );

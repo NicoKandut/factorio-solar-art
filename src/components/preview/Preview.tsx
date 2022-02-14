@@ -20,6 +20,8 @@ export const Preview = (props: Props) => {
   const roboportsRef = useRef<HTMLCanvasElement>(null);
   const concreteReinforcedRef = useRef<HTMLCanvasElement>(null);
   const wallsRef = useRef<HTMLCanvasElement>(null);
+  const radarRef = useRef<HTMLCanvasElement>(null);
+  const stonePathRef = useRef<HTMLCanvasElement>(null);
 
   const offset = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
 
@@ -52,43 +54,57 @@ export const Preview = (props: Props) => {
     1,
     offset
   );
+  useCachedEntityCanvas(tiles, stonePathRef.current, "stone-path", 1, offset);
   useCachedEntityCanvas(entities, wallsRef.current, "stone-wall", 1, offset);
+  useCachedEntityCanvas(entities, radarRef.current, "radar", 3, offset);
 
   return (
     <div className="stage">
       <canvas
         ref={solarpanelsRef}
-        className="solarpanels"
+        className="layer solarpanels"
         width={width}
         height={height}
       />
       <canvas
         ref={accumulatorRef}
-        className="accumulators"
+        className="layer accumulators"
         width={width}
         height={height}
       />
       <canvas
         ref={powerpolesRef}
-        className="powerpoles"
+        className="layer powerpoles"
+        width={width}
+        height={height}
+      />
+      <canvas
+        ref={radarRef}
+        className="layer radar"
         width={width}
         height={height}
       />
       <canvas
         ref={roboportsRef}
-        className="roboports"
+        className="layer roboports"
         width={width}
         height={height}
       />
       <canvas
         ref={concreteReinforcedRef}
-        className="refined-concrete"
+        className="layer refined-concrete"
         width={width}
         height={height}
       />
       <canvas
         ref={wallsRef}
-        className="stone-wall"
+        className="layer stone-wall"
+        width={width}
+        height={height}
+      />
+      <canvas
+        ref={stonePathRef}
+        className="layer stone-path"
         width={width}
         height={height}
       />

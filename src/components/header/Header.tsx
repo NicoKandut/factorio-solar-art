@@ -17,8 +17,16 @@ const Header = ({ className }: { className?: string }) => {
           New version available. Click here to reload.
         </span>
       ) : (
-        <span className="header-update"></span>
+        <span className="header-version">v1.1</span>
       )}
+      <Button
+        onClick={() => {
+          window.location.href =
+            "https://github.com/NicoKandut/factorio-solar-art/blob/main/CHANGELOG.md";
+        }}
+      >
+        <span className="material-icons">feed</span>
+      </Button>
       <Button
         onClick={() => {
           window.location.href =

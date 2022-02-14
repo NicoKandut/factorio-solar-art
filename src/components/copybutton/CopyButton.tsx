@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { combine } from "../../logic/classnames";
 import { Button } from "../button/Button";
-import "./CopyButton.css";
 
 const stateTimeout = 1000;
 
@@ -15,12 +14,12 @@ interface Props {
   className?: string;
 }
 
+type State = "default" | "success" | "error";
+
 export const CopyButton = (props: Props) => {
   const { text, icons, className = "" } = props;
 
-  const [state, setState] = useState<"default" | "success" | "error">(
-    "default"
-  );
+  const [state, setState] = useState<State>("default");
 
   useEffect(() => {
     if (state !== "default") {

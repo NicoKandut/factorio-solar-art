@@ -1,13 +1,9 @@
 export interface Config {
-  readonly scale: number;
-
+  scale: number;
   threshold: number;
   transparency: boolean;
   roboports: boolean;
   tiles: boolean;
   walls: boolean;
-
-  name: string;
+  radars: boolean;
 }
-
-export type Theme = "dark" | "light";

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Button } from "../components/button/Button";
 import { CopyButton } from "../components/copybutton/CopyButton";
 import Header from "../components/header/Header";
@@ -22,8 +22,10 @@ const initialConfig: Config = {
   roboports: true,
   tiles: true,
   walls: true,
-  name: "My Blueprint",
+  radars: true,
 };
+
+const initialName = "My Blueprint";
 
 const copyButtonIcons = {
   success: <span className="icon success material-icons">check_circle</span>,
@@ -34,22 +36,38 @@ const copyButtonIcons = {
 export const App = () => {
   const imageRef = useRef<HTMLImageElement>(null);
 
+  const [name, setName] = useState(initialName);
   const [config, setConfig] = useState(initialConfig);
   const [file, setFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState("");
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [blueprint, setBlueprint] = useState<FactorioBlueprint | null>(null);
+
+  const namedBlueprint: FactorioBlueprint | null = useMemo(
+    () =>
+      blueprint
+        ? {
+            blueprint: { ...blueprint.blueprint, label: name },
+          }
+        : null,
+    [blueprint, name]
+  );
   const [importableText, setImportableText] = useState("");
   useImageLoader(imageRef, file, setImageSrc, setSize);
   useBlueprintCalculation(imageRef, size, config, setBlueprint);
-  useBlueprintSerializer(blueprint, setImportableText);
+  useBlueprintSerializer(namedBlueprint, setImportableText);
 
   return (
     <div className="app">
       <Header className="area-header" />
       <Section className="area-settings">
         <span>Settings</span>
-        <Settings config={config} setConfig={setConfig} />
+        <Settings
+          config={config}
+          setConfig={setConfig}
+          name={name}
+          setName={setName}
+        />
       </Section>
 
       <Section className="area-source">

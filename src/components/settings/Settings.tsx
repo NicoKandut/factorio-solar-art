@@ -7,16 +7,18 @@ import "./Settings.css";
 interface Props {
   config: Config;
   setConfig: (config: Config) => void;
+  name: string;
+  setName: (name: string) => void;
 }
 
 export const Settings = (props: Props) => {
-  const { config, setConfig } = props;
+  const { config, setConfig, name, setName } = props;
 
   return (
     <div className="settings">
       <Textbox
-        value={config.name}
-        setValue={(v) => setConfig({ ...config, name: v })}
+        value={name}
+        setValue={(v) => setName(v)}
         hint="This will be the in-game name of your blueprint."
       >
         <span>Name</span>
@@ -48,6 +50,13 @@ export const Settings = (props: Props) => {
         hint="When enabled, the blueprint will ensure logistic network coverage across the whole blueprint."
       >
         <span>Use Roboports</span>
+      </Checkbox>
+      <Checkbox
+        value={config.radars}
+        setValue={(v) => setConfig({ ...config, radars: v })}
+        hint="When enabled, the blueprint will ensure radar coverage."
+      >
+        <span>Use Radars</span>
       </Checkbox>
       <Slider
         min={0}

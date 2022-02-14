@@ -3,7 +3,8 @@ export type EntityType =
   | "roboport"
   | "solar-panel"
   | "accumulator"
-  | "stone-wall";
+  | "stone-wall"
+  | "radar";
 
 export type TileType = "stone-path" | "concrete" | "refined-concrete";
 
@@ -69,6 +70,7 @@ export const sizes: Record<EntityType | TileType, number> = {
   "stone-path": 1,
   concrete: 1,
   "refined-concrete": 1,
+  radar: 3,
 };
 
 export const entityColors: Record<ExtendedEntityType, string> = {
@@ -76,10 +78,11 @@ export const entityColors: Record<ExtendedEntityType, string> = {
   "solar-panel": "#182020",
   substation: "rgb(0, 93, 148)",
   roboport: "rgb(214, 206, 132)",
-  "stone-path": "rgb(0, 0, 0)",
+  "stone-path": "#52514A",
   concrete: "rgb(59, 61, 58)",
   "refined-concrete": "rgb(49, 50, 42)",
   ground: "rgb(140, 105, 58)",
   transparent: "transparent",
   "stone-wall": "rgb(217, 216, 207)",
+  radar: "#006090",
 };

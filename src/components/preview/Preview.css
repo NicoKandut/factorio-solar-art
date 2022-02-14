@@ -2,16 +2,10 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: rgb(140, 105, 58);
-  border-radius: var(--button-rounding);
+  background-color: var(--ground);
 }
 
-.solarpanels,
-.accumulators,
-.powerpoles,
-.roboports,
-.refined-concrete,
-.stone-wall {
+.layer {
   position: absolute;
   top: 0;
   left: 0;

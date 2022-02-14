@@ -2,10 +2,9 @@
   /* sizes */
   --spacing-inline: 0.5rem;
   --spacing-grid: 1rem;
-  --button-rounding: 3px;
+
+  --rounding: 3px;
   --transition-time: 0.1s;
-  --transition-time-long: 0.4s;
-  --inline-icon-size: 24px;
   --line-strength: 1px;
 
   /* colors */
@@ -23,6 +22,7 @@
   --fair: #b2dd6d;
   --bad: #e4ca5a;
   --negative: #fd5959;
+  --ground: #8c693a;
 
   /* shadow */
   --shadow-cutout: inset 0 0 3px 0 #000, 0 -2px 2px -1px #000,
@@ -31,6 +31,10 @@
     inset -3px 0 2px -2px #201815, inset 0 -3px 3px -3px #000, 0 0 3px 0 #201815;
   --shadow-riffle: drop-shadow(0px 1px 1px var(--bg-color));
   --shadow-elevation: 0 3px 5px 0 #201815;
+
+  /* filter */
+  --brighten: brightness(1.2);
+  --darken: brightness(0.8);
 
   /* size */
   height: 100vh;
@@ -116,5 +120,5 @@
   object-fit: contain;
   image-rendering: pixelated;
   background-color: rgb(140, 105, 58);
-  border-radius: var(--button-rounding);
+  border-radius: var(--rounding);
 }

@@ -1,7 +1,8 @@
 .item {
+  --size: 32px;
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: var(--size);
+  height: var(--size);
 }
 
 .item-count {

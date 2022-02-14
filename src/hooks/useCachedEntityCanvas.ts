@@ -28,7 +28,9 @@ export const useCachedEntityCanvas = (
       const additionalOffset =
         type === "roboport"
           ? -1
-          : type === "stone-wall" || type === "refined-concrete"
+          : type === "stone-wall" ||
+            type === "refined-concrete" ||
+            type === "stone-path"
           ? 1
           : 0;
 

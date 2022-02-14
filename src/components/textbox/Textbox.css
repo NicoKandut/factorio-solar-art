@@ -11,7 +11,7 @@
 
   /* layout */
   padding: var(--spacing-inline);
-  border-radius: var(--button-rounding);
+  border-radius: var(--rounding);
 
   /* theming */
   background-color: var(--weird-cream);

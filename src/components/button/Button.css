@@ -3,6 +3,7 @@
   border: none;
   cursor: pointer;
   color: inherit;
+
   /* layout */
   display: inline-flex;
   align-items: center;
@@ -11,8 +12,9 @@
   padding: var(--spacing-inline);
 
   /* theming */
-  height: 24px;
-  width: 24px;
+  --size: 24px;
+  height: var(--size);
+  width: var(--size);
   color: white;
 
   background-color: var(--section-color);
@@ -26,9 +28,9 @@
 }
 
 .button:hover {
-  filter: brightness(1.2);
+  filter: var(--brighten);
 }
 
 .button:active {
-  filter: brightness(0.8);
+  filter: var(--darken);
 }

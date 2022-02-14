@@ -15,7 +15,12 @@
   flex-grow: 1;
 }
 
+.header-version {
+  flex-grow: 1;
+  opacity: 0.5;
+}
+
 .header-update:hover {
   text-decoration: underline;
-  filter: brightness(1.3);
+  filter: var(--brighten);
 }
