@@ -11,6 +11,7 @@ import { UploadArea } from "../components/uploadarea/UploadArea";
 import { useBlueprintCalculation } from "../hooks/useBlueprintCalculation";
 import { useBlueprintSerializer } from "../hooks/useBlueprintSerializer";
 import { useImageLoader } from "../hooks/useImageLoader";
+import { SE_TILES_PER_PIXEL, TILES_PER_PIXEL } from "../logic/constants";
 import { FactorioBlueprint } from "../types/factorio";
 import { Config } from "../types/ui";
 import "./App.css";
@@ -23,6 +24,9 @@ const initialConfig: Config = {
   tiles: true,
   walls: true,
   radars: true,
+  mods: {
+    spaceExploration: false,
+  },
 };
 
 const initialName = "My Blueprint";
@@ -56,6 +60,9 @@ export const App = () => {
   useImageLoader(imageRef, file, setImageSrc, setSize);
   useBlueprintCalculation(imageRef, size, config, setBlueprint);
   useBlueprintSerializer(namedBlueprint, setImportableText);
+  const tilesPerPixel = config.mods.spaceExploration
+    ? SE_TILES_PER_PIXEL
+    : TILES_PER_PIXEL;
 
   return (
     <div className="app">
@@ -119,8 +126,9 @@ export const App = () => {
           <Preview
             entities={blueprint?.blueprint?.entities || []}
             tiles={blueprint?.blueprint.tiles || []}
-            width={size.width * config.scale}
-            height={size.height * config.scale}
+            width={size.width * tilesPerPixel}
+            height={size.height * tilesPerPixel}
+            useSpaceExploration={config.mods.spaceExploration}
           />
         )}
       </Section>
@@ -128,7 +136,10 @@ export const App = () => {
       <Section className="area-statistics">
         <span>Statistics</span>
 
-        <Statistics blueprint={blueprint} />
+        <Statistics
+          blueprint={blueprint}
+          useSpaceExploration={config.mods.spaceExploration}
+        />
       </Section>
     </div>
   );

@@ -6,4 +6,7 @@ export interface Config {
   tiles: boolean;
   walls: boolean;
   radars: boolean;
+  mods: {
+    spaceExploration: boolean;
+  };
 }

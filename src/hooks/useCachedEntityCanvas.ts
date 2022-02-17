@@ -5,6 +5,7 @@ import {
   FactorioEntity,
   FactorioPosition,
   FactorioTile,
+  sizes,
   TileType,
 } from "../types/factorio";
 
@@ -17,14 +18,17 @@ const canvasOffset: Record<EntityType | TileType, number> = {
   "solar-panel": 0,
   accumulator: 0,
   radar: 0,
-  concrete: 1,
+  "se-space-solar-panel-3": -1,
+  "se-space-accumulator-2": 0,
+  "se-pylon-substation": 0,
+  "se-pylon-construction": 0,
+  "se-pylon-construction-radar-roboport": 0,
 };
 
 export const useCachedEntityCanvas = (
   entities: FactorioEntity[] | FactorioTile[],
   canvas: HTMLCanvasElement | null,
   type: EntityType | TileType,
-  size: number,
   offset: { x: number; y: number }
 ) => {
   const [loading, setLoading] = useState(false);
@@ -40,6 +44,7 @@ export const useCachedEntityCanvas = (
 
   const width = canvas?.width ?? 0;
   const height = canvas?.height ?? 0;
+  const size = sizes[type];
 
   useEffect(() => {
     if (context && filteredEntities) {

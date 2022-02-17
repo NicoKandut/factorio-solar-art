@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { useState } from "react";
 import "./Textbox.css";
 
 interface Props {

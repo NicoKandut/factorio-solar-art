@@ -4,9 +4,14 @@ export type EntityType =
   | "solar-panel"
   | "accumulator"
   | "stone-wall"
-  | "radar";
+  | "radar"
+  | "se-space-solar-panel-3"
+  | "se-space-accumulator-2"
+  | "se-pylon-substation"
+  | "se-pylon-construction"
+  | "se-pylon-construction-radar-roboport";
 
-export type TileType = "stone-path" | "concrete" | "refined-concrete";
+export type TileType = "stone-path" | "refined-concrete";
 
 export type ExtendedEntityType =
   | EntityType
@@ -68,9 +73,13 @@ export const sizes: Record<EntityType | TileType, number> = {
   substation: 2,
   "stone-wall": 1,
   "stone-path": 1,
-  concrete: 1,
   "refined-concrete": 1,
   radar: 3,
+  "se-space-solar-panel-3": 4,
+  "se-space-accumulator-2": 2,
+  "se-pylon-substation": 2,
+  "se-pylon-construction": 2,
+  "se-pylon-construction-radar-roboport": 2,
 };
 
 export const entityColors: Record<ExtendedEntityType, string> = {
@@ -79,10 +88,14 @@ export const entityColors: Record<ExtendedEntityType, string> = {
   substation: "rgb(0, 93, 148)",
   roboport: "rgb(214, 206, 132)",
   "stone-path": "#52514A",
-  concrete: "rgb(59, 61, 58)",
   "refined-concrete": "rgb(49, 50, 42)",
   ground: "rgb(140, 105, 58)",
   transparent: "transparent",
   "stone-wall": "rgb(217, 216, 207)",
   radar: "#006090",
+  "se-space-solar-panel-3": "#182020",
+  "se-space-accumulator-2": "#787A78",
+  "se-pylon-substation": "rgb(0, 93, 148)",
+  "se-pylon-construction": "rgb(214, 206, 132)",
+  "se-pylon-construction-radar-roboport": "rgb(214, 206, 132)",
 };

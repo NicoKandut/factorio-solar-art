@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-const itemUrls: Partial<Record<Items, string>> = {
+const itemUrls: Record<Items, string> = {
   "solar-panel":
     "https://wiki.factorio.com/images/thumb/Solar_panel.png/32px-Solar_panel.png",
   accumulator:
@@ -23,13 +23,25 @@ const itemUrls: Partial<Record<Items, string>> = {
   "stone-wall": "https://wiki.factorio.com/images/thumb/Wall.png/32px-Wall.png",
   "refined-concrete":
     "https://wiki.factorio.com/images/thumb/Refined_concrete.png/32px-Refined_concrete.png",
+  radar: "https://wiki.factorio.com/images/thumb/Radar.png/32px-Radar.png",
+  "stone-path":
+    "https://wiki.factorio.com/images/thumb/Stone_brick.png/32px-Stone_brick.png",
+  "se-space-solar-panel-3": process.env.PUBLIC_URL + "/images/solar-panel.png",
+  "se-space-accumulator-2":
+    process.env.PUBLIC_URL + "/images/accumulator-2.png",
+  "se-pylon-substation":
+    process.env.PUBLIC_URL + "/images/pylon-substation.png",
+  "se-pylon-construction":
+    process.env.PUBLIC_URL + "/images/pylon-construction.png",
+  "se-pylon-construction-radar-roboport":
+    process.env.PUBLIC_URL + "/images/pylon-construction-radar.png",
 };
 
 export const Item = (props: Props) => {
   const { count, name, className } = props;
 
   return (
-    <div className={combine("item", className)}>
+    <div className={combine("item", className)} title={name}>
       <img src={itemUrls[name]} alt={name} className="item-image" />
       <span className="item-count">{shorten(count)}</span>
     </div>

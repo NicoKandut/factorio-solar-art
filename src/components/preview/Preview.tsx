@@ -10,10 +10,11 @@ interface Props {
   tiles: FactorioTile[];
   width: number;
   height: number;
+  useSpaceExploration: boolean;
 }
 
 export const Preview = (props: Props) => {
-  const { entities, tiles, width, height } = props;
+  const { entities, tiles, width, height, useSpaceExploration } = props;
 
   const solarpanelsRef = useRef<HTMLCanvasElement>(null);
   const accumulatorRef = useRef<HTMLCanvasElement>(null);
@@ -30,41 +31,41 @@ export const Preview = (props: Props) => {
     useCachedEntityCanvas(
       entities,
       solarpanelsRef.current,
-      "solar-panel",
-      3,
+      useSpaceExploration ? "se-space-solar-panel-3" : "solar-panel",
       offset
     ),
     useCachedEntityCanvas(
       entities,
       accumulatorRef.current,
-      "accumulator",
-      2,
+      useSpaceExploration ? "se-space-accumulator-2" : "accumulator",
       offset
     ),
     useCachedEntityCanvas(
       entities,
       powerpolesRef.current,
-      "substation",
-      2,
+      useSpaceExploration ? "se-pylon-substation" : "substation",
       offset
     ),
     useCachedEntityCanvas(
       entities,
       roboportsRef.current,
-      "roboport",
-      4,
+      useSpaceExploration ? "se-pylon-construction" : "roboport",
       offset
     ),
     useCachedEntityCanvas(
       tiles,
       concreteReinforcedRef.current,
       "refined-concrete",
-      1,
       offset
     ),
-    useCachedEntityCanvas(tiles, stonePathRef.current, "stone-path", 1, offset),
-    useCachedEntityCanvas(entities, wallsRef.current, "stone-wall", 1, offset),
-    useCachedEntityCanvas(entities, radarRef.current, "radar", 3, offset),
+    useCachedEntityCanvas(tiles, stonePathRef.current, "stone-path", offset),
+    useCachedEntityCanvas(entities, wallsRef.current, "stone-wall", offset),
+    useCachedEntityCanvas(
+      entities,
+      radarRef.current,
+      useSpaceExploration ? "se-pylon-construction-radar-roboport" : "radar",
+      offset
+    ),
   ];
 
   const loading = loadingStates.some((s) => s);

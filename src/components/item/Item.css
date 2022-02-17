@@ -5,6 +5,12 @@
   height: var(--size);
 }
 
+.item-image {
+  width: var(--size);
+  height: var(--size);
+  object-fit: contain;
+}
+
 .item-count {
   position: absolute;
   bottom: 0;

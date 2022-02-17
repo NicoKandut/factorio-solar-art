@@ -67,6 +67,18 @@ export const Settings = (props: Props) => {
       >
         <label>Contrast</label>
       </Slider>
+      <Checkbox
+        value={config.mods.spaceExploration}
+        setValue={(v) =>
+          setConfig({
+            ...config,
+            mods: { ...config.mods, spaceExploration: v },
+          })
+        }
+        hint="When enabled, the blueprint will use items from space exploration."
+      >
+        <label>[MOD] Space Exploration</label>
+      </Checkbox>
     </div>
   );
 };

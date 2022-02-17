@@ -5,6 +5,8 @@ import type {
   TileType,
 } from "../types/factorio";
 import {
+  SE_TILE_SIZE_PYLON,
+  SE_TILE_SIZE_SOLAR_PANEL,
   TILES_PER_PIXEL,
   TILE_SIZE_ACCUMULATOR,
   TILE_SIZE_RADAR,
@@ -42,6 +44,11 @@ const sizes: Record<EntityType, number> = {
   substation: TILE_SIZE_SUBSTATION,
   "stone-wall": TILE_SIZE_WALL,
   radar: TILE_SIZE_RADAR,
+  "se-space-solar-panel-3": SE_TILE_SIZE_SOLAR_PANEL,
+  "se-space-accumulator-2": TILE_SIZE_ACCUMULATOR,
+  "se-pylon-substation": SE_TILE_SIZE_PYLON,
+  "se-pylon-construction": SE_TILE_SIZE_PYLON,
+  "se-pylon-construction-radar-roboport": SE_TILE_SIZE_PYLON,
 };
 
 const entityTypeToTile: Record<Exclude<PixelType, "transparent">, TileType> = {
@@ -56,12 +63,12 @@ const entityOffset: Record<Exclude<PixelType, "transparent">, number> = {
   "stone-wall": -1,
 };
 
-const createEmptyPixel = (): Pixel => ({
+export const createEmptyPixel = (): Pixel => ({
   entities: [],
   tiles: [],
 });
 
-const EMPTY_PIXEL: Pixel = createEmptyPixel();
+export const EMPTY_PIXEL: Pixel = createEmptyPixel();
 
 // static arrays for gaps that occur when inserting necessary infrastructure
 const TILES_SUBSTATION_ON_SOLAR = [
