@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3 18.02.2022
+
+### Added
+
+- experimental support for space exploration mod
+
 ## v1.2 17.02.2022
 
 ### Added
