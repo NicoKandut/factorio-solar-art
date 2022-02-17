@@ -16,7 +16,7 @@ export const Slider = (props: PropsWithChildren<Props>) => {
   const [internalValue, setInternalValue] = useState(value);
 
   return (
-    <div className="slider" title={hint}>
+    <label className="slider" title={hint}>
       {children}
       <input
         type="range"
@@ -28,6 +28,6 @@ export const Slider = (props: PropsWithChildren<Props>) => {
         onChange={(e) => setInternalValue(Number(e.target.value))}
         onMouseUp={() => setValue(internalValue)}
       />
-    </div>
+    </label>
   );
 };

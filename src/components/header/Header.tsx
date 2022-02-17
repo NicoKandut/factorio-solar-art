@@ -11,7 +11,7 @@ const Header = ({ className }: { className?: string }) => {
       {getUpdateAvailable() ? (
         <span
           className="header-update"
-          //@ts-expect-error
+          //@ts-expect-error ts does not know about reload(true)
           onClick={() => window.location.reload(true)}
         >
           New version available. Click here to reload.
@@ -20,6 +20,7 @@ const Header = ({ className }: { className?: string }) => {
         <span className="header-version">v1.1</span>
       )}
       <Button
+        title="Changelog"
         onClick={() => {
           window.location.href =
             "https://github.com/NicoKandut/factorio-solar-art/blob/main/CHANGELOG.md";
@@ -28,6 +29,7 @@ const Header = ({ className }: { className?: string }) => {
         <span className="material-icons">feed</span>
       </Button>
       <Button
+        title="Github Repository"
         onClick={() => {
           window.location.href =
             "https://github.com/NicoKandut/factorio-solar-art";
@@ -36,9 +38,9 @@ const Header = ({ className }: { className?: string }) => {
         <GithubIcon />
       </Button>
       <Button
+        title="Discord Server"
         onClick={() => {
-          window.location.href =
-            "https://discordapp.com/users/272673243083571202";
+          window.location.href = "https://discord.gg/2Sh3QTAY";
         }}
       >
         <span className="material-icons">discord</span>

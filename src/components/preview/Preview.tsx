@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useCachedEntityCanvas } from "../../hooks/useCachedEntityCanvas";
 import { FactorioEntity, FactorioTile } from "../../types/factorio";
+import { CenteredLoader } from "../loader/Loader";
 
 import "./Preview.css";
 
@@ -25,41 +26,52 @@ export const Preview = (props: Props) => {
 
   const offset = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
 
-  useCachedEntityCanvas(
-    entities,
-    solarpanelsRef.current,
-    "solar-panel",
-    3,
-    offset
-  );
-  useCachedEntityCanvas(
-    entities,
-    accumulatorRef.current,
-    "accumulator",
-    2,
-    offset
-  );
-  useCachedEntityCanvas(
-    entities,
-    powerpolesRef.current,
-    "substation",
-    2,
-    offset
-  );
-  useCachedEntityCanvas(entities, roboportsRef.current, "roboport", 4, offset);
-  useCachedEntityCanvas(
-    tiles,
-    concreteReinforcedRef.current,
-    "refined-concrete",
-    1,
-    offset
-  );
-  useCachedEntityCanvas(tiles, stonePathRef.current, "stone-path", 1, offset);
-  useCachedEntityCanvas(entities, wallsRef.current, "stone-wall", 1, offset);
-  useCachedEntityCanvas(entities, radarRef.current, "radar", 3, offset);
+  const loadingStates = [
+    useCachedEntityCanvas(
+      entities,
+      solarpanelsRef.current,
+      "solar-panel",
+      3,
+      offset
+    ),
+    useCachedEntityCanvas(
+      entities,
+      accumulatorRef.current,
+      "accumulator",
+      2,
+      offset
+    ),
+    useCachedEntityCanvas(
+      entities,
+      powerpolesRef.current,
+      "substation",
+      2,
+      offset
+    ),
+    useCachedEntityCanvas(
+      entities,
+      roboportsRef.current,
+      "roboport",
+      4,
+      offset
+    ),
+    useCachedEntityCanvas(
+      tiles,
+      concreteReinforcedRef.current,
+      "refined-concrete",
+      1,
+      offset
+    ),
+    useCachedEntityCanvas(tiles, stonePathRef.current, "stone-path", 1, offset),
+    useCachedEntityCanvas(entities, wallsRef.current, "stone-wall", 1, offset),
+    useCachedEntityCanvas(entities, radarRef.current, "radar", 3, offset),
+  ];
+
+  const loading = loadingStates.some((s) => s);
 
   return (
     <div className="stage">
+      {loading ? <CenteredLoader /> : null}
       <canvas
         ref={solarpanelsRef}
         className="layer solarpanels"

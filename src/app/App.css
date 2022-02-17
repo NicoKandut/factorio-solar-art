@@ -44,12 +44,11 @@
   /* layout */
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "header header header"
     "settings source preview"
-    "statistics source preview"
-    "statistics code code";
+    "statistics source preview";
   padding: var(--spacing-grid);
   gap: var(--spacing-grid);
   box-sizing: border-box;
@@ -110,6 +109,8 @@
   height: 100%;
   width: 100%;
   resize: none;
+  user-select: all;
+  cursor: pointer;
 }
 
 .source-image {

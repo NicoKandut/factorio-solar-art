@@ -45,7 +45,7 @@ export const Statistics = (props: Props) => {
   }, [blueprint]);
 
   if (!blueprint || !statistics) {
-    return <span>No statistics yet...</span>;
+    return null;
   }
 
   const ratio = statistics["accumulator"] / statistics["solar-panel"];

@@ -11,7 +11,7 @@ export const Checkbox = (props: PropsWithChildren<Props>) => {
   const { value, setValue, children, hint } = props;
 
   return (
-    <div className="checkbox" title={hint}>
+    <label className="checkbox" title={hint}>
       <input
         type="checkbox"
         className="checkbox-input"
@@ -19,6 +19,6 @@ export const Checkbox = (props: PropsWithChildren<Props>) => {
         onChange={() => setValue(!value)}
       />
       {children}
-    </div>
+    </label>
   );
 };

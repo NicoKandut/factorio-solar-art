@@ -5,16 +5,17 @@ interface Props {
   value: string;
   setValue: (value: string) => void;
   hint: string;
+  label: string;
 }
 
-export const Textbox = (props: PropsWithChildren<Props>) => {
-  const { value, setValue, children, hint } = props;
+export const Textbox = (props: Props) => {
+  const { value, setValue, label, hint } = props;
 
   const [internalValue, setInternalValue] = useState(value);
 
   return (
-    <div className="textbox" title={hint}>
-      {children}
+    <label className="textbox" title={hint}>
+      {label}
       <input
         type="text"
         className="textbox-input"
@@ -27,6 +28,6 @@ export const Textbox = (props: PropsWithChildren<Props>) => {
           }
         }}
       />
-    </div>
+    </label>
   );
 };

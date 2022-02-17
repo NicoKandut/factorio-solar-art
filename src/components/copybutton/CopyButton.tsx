@@ -31,6 +31,7 @@ export const CopyButton = (props: Props) => {
 
   return (
     <Button
+      title="Copy Blueprint"
       className={combine("copy-button", className)}
       onClick={() => {
         navigator.clipboard

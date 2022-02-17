@@ -17,46 +17,45 @@ export const Settings = (props: Props) => {
   return (
     <div className="settings">
       <Textbox
+        label="Name"
         value={name}
         setValue={(v) => setName(v)}
         hint="This will be the in-game name of your blueprint."
-      >
-        <span>Name</span>
-      </Textbox>
+      />
       <Checkbox
         value={config.transparency}
         setValue={(v) => setConfig({ ...config, transparency: v })}
         hint="When enabled, transparent parts of the image will be empty in the blueprint."
       >
-        <span>Use Transparency</span>
+        <label>Use Transparency</label>
       </Checkbox>
       <Checkbox
         value={config.tiles}
         setValue={(v) => setConfig({ ...config, tiles: v })}
         hint="When enabled, the blueprint will use tiles to fill in the gaps."
       >
-        <span>Use Tiles</span>
+        <label>Use Tiles</label>
       </Checkbox>
       <Checkbox
         value={config.walls}
         setValue={(v) => setConfig({ ...config, walls: v })}
         hint="When enabled, the blueprint will use walls for white areas."
       >
-        <span>Use Walls</span>
+        <label>Use Walls</label>
       </Checkbox>
       <Checkbox
         value={config.roboports}
         setValue={(v) => setConfig({ ...config, roboports: v })}
         hint="When enabled, the blueprint will ensure logistic network coverage across the whole blueprint."
       >
-        <span>Use Roboports</span>
+        <label>Use Roboports</label>
       </Checkbox>
       <Checkbox
         value={config.radars}
         setValue={(v) => setConfig({ ...config, radars: v })}
         hint="When enabled, the blueprint will ensure radar coverage."
       >
-        <span>Use Radars</span>
+        <label>Use Radars</label>
       </Checkbox>
       <Slider
         min={0}
@@ -66,7 +65,7 @@ export const Settings = (props: Props) => {
         setValue={(v) => setConfig({ ...config, threshold: v })}
         hint="This is the threshold between solar panels and accumulators. Higher values will result in more solar panels."
       >
-        <span>Contrast</span>
+        <label>Contrast</label>
       </Slider>
     </div>
   );

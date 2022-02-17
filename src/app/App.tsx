@@ -74,6 +74,7 @@ export const App = () => {
         <span>Source</span>
         {file && (
           <Button
+            title="Reset"
             className="clear-button"
             onClick={() => {
               setFile(null);
@@ -101,9 +102,15 @@ export const App = () => {
       <Section className="area-preview">
         <span>Preview</span>
         {file && (
-          <Button onClick={() => setConfig({ ...config })}>
-            <span className="material-icons">replay</span>
-          </Button>
+          <>
+            <CopyButton text={importableText} icons={copyButtonIcons} />
+            <Button
+              title="Recalculate"
+              onClick={() => setConfig({ ...config })}
+            >
+              <span className="material-icons">replay</span>
+            </Button>
+          </>
         )}
 
         {file && !blueprint ? (
@@ -122,16 +129,6 @@ export const App = () => {
         <span>Statistics</span>
 
         <Statistics blueprint={blueprint} />
-      </Section>
-
-      <Section className="area-code">
-        <span>Code</span>
-        <CopyButton text={importableText} icons={copyButtonIcons} />
-        {file && !importableText ? (
-          <CenteredLoader />
-        ) : (
-          <textarea className="code-area" value={importableText} readOnly />
-        )}
       </Section>
     </div>
   );
