@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/factorio-solar-art/static/css/main.55561a31.css",
-    "main.js": "/factorio-solar-art/static/js/main.baf6f1ad.js",
+    "main.js": "/factorio-solar-art/static/js/main.e8623615.js",
     "static/js/377.32fcc0be.chunk.js": "/factorio-solar-art/static/js/377.32fcc0be.chunk.js",
     "service-worker.js": "/factorio-solar-art/service-worker.js",
     "index.html": "/factorio-solar-art/index.html",
     "main.55561a31.css.map": "/factorio-solar-art/static/css/main.55561a31.css.map",
-    "main.baf6f1ad.js.map": "/factorio-solar-art/static/js/main.baf6f1ad.js.map",
+    "main.e8623615.js.map": "/factorio-solar-art/static/js/main.e8623615.js.map",
     "377.32fcc0be.chunk.js.map": "/factorio-solar-art/static/js/377.32fcc0be.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.55561a31.css",
-    "static/js/main.baf6f1ad.js"
+    "static/js/main.e8623615.js"
   ]
 }
