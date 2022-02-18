@@ -24,7 +24,10 @@ export const index = (x: number, y: number, width: number, size: number) =>
 
 export const mapColor = (color: number[], config: Config): PixelType => {
   const isTransparent = config.transparency && color[3] === 0;
-  const brightness = (color[0] + color[1] + color[2]) / 255 / 3;
+  const red = color[0];
+  const green = color[1];
+  const blue = color[2];
+  const brightness = (0.2126 * red + 0.7152 * green + 0.0772 * blue) / 255;
 
   return isTransparent
     ? "transparent"
