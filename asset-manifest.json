@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/factorio-solar-art/static/css/main.55561a31.css",
-    "main.js": "/factorio-solar-art/static/js/main.e8623615.js",
+    "main.css": "/factorio-solar-art/static/css/main.d721c1ed.css",
+    "main.js": "/factorio-solar-art/static/js/main.12df35be.js",
     "static/js/377.32fcc0be.chunk.js": "/factorio-solar-art/static/js/377.32fcc0be.chunk.js",
     "service-worker.js": "/factorio-solar-art/service-worker.js",
     "index.html": "/factorio-solar-art/index.html",
-    "main.55561a31.css.map": "/factorio-solar-art/static/css/main.55561a31.css.map",
-    "main.e8623615.js.map": "/factorio-solar-art/static/js/main.e8623615.js.map",
+    "main.d721c1ed.css.map": "/factorio-solar-art/static/css/main.d721c1ed.css.map",
+    "main.12df35be.js.map": "/factorio-solar-art/static/js/main.12df35be.js.map",
     "377.32fcc0be.chunk.js.map": "/factorio-solar-art/static/js/377.32fcc0be.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.55561a31.css",
-    "static/js/main.e8623615.js"
+    "static/css/main.d721c1ed.css",
+    "static/js/main.12df35be.js"
   ]
 }
