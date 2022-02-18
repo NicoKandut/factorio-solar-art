@@ -1,7 +1,9 @@
 import {
   SE_PIXEL_RADIUS_POWER_PYLON,
+  SE_PIXEL_RADIUS_SUPERCHARGER,
   SE_PIXEL_RANGE_POWER_PYLON,
   SE_PIXEL_RANGE_RADAR_PYLON,
+  SE_PIXEL_RANGE_SUPERCHARGER,
   SE_TILES_PER_PIXEL,
 } from "./constants";
 import { getIdGenerator } from "./entityIdGenerator";
@@ -11,6 +13,7 @@ type Options = {
   tiles: boolean;
   power: boolean;
   radar: boolean;
+  charger: boolean;
   offsetX: number;
   offsetY: number;
 };
@@ -46,6 +49,10 @@ export const seNeedsRadarPylon = (x: number, y: number) =>
     SE_PIXEL_RANGE_RADAR_PYLON ===
     0;
 
+export const seNeedsSupercharger = (x: number, y: number) =>
+  (x + SE_PIXEL_RADIUS_SUPERCHARGER) % SE_PIXEL_RANGE_SUPERCHARGER === 0 &&
+  (y + SE_PIXEL_RADIUS_SUPERCHARGER) % SE_PIXEL_RANGE_SUPERCHARGER === 0;
+
 export const createSePixel = (
   type: PixelType,
   x: number,
@@ -58,6 +65,18 @@ export const createSePixel = (
 
   const pixel = createEmptyPixel();
   const idGenerator = getIdGenerator();
+
+  if (options.charger) {
+    pixel.entities.push({
+      entity_number: idGenerator.next().value,
+      name: "se-supercharger",
+      position: {
+        x: options.offsetX + x + 1,
+        y: options.offsetY + y + 1,
+      },
+    });
+    return pixel;
+  }
 
   if (options.power) {
     pixel.entities.push({

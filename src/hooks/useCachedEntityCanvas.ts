@@ -23,6 +23,7 @@ const canvasOffset: Record<EntityType | TileType, number> = {
   "se-pylon-substation": 0,
   "se-pylon-construction": 0,
   "se-pylon-construction-radar-roboport": 0,
+  "se-supercharger": -1,
 };
 
 export const useCachedEntityCanvas = (

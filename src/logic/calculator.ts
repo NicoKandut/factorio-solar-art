@@ -14,6 +14,7 @@ import {
   createSePixel,
   seNeedsPowerPylon,
   seNeedsRadarPylon,
+  seNeedsSupercharger,
 } from "./sePixelFactory";
 
 /**
@@ -66,6 +67,7 @@ export const calculateBlueprint = async (
             tiles: config.tiles,
             power: seNeedsPowerPylon(pixelX, pixelY),
             radar: seNeedsRadarPylon(pixelX, pixelY),
+            charger: seNeedsSupercharger(pixelX, pixelY),
             offsetX: tileOffsetX,
             offsetY: tileOffsetY,
           })

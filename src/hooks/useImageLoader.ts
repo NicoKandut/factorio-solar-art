@@ -13,6 +13,7 @@ import { Size } from "../types/types";
 export const useImageLoader = (
   imageRef: RefObject<HTMLImageElement>,
   file: File | null | undefined,
+  scale: number,
   setSrc: (src: string) => void,
   setSize: (size: Size) => void
 ) => {
@@ -26,12 +27,12 @@ export const useImageLoader = (
 
       const listener = (event: Event) => {
         const image = event.target as HTMLImageElement;
-        const width = image.naturalWidth;
-        const height = image.naturalHeight;
+        const width = image.naturalWidth * scale;
+        const height = image.naturalHeight * scale;
 
         sharedCanvas.width = width;
         sharedCanvas.height = height;
-        sharedCanvasContext.drawImage(image, 0, 0);
+        sharedCanvasContext.drawImage(image, 0, 0, width, height);
 
         setSize({ width, height });
       };
@@ -43,5 +44,5 @@ export const useImageLoader = (
       setSrc("");
       setSize({ width: 0, height: 0 });
     }
-  }, [file, imageRef, setSize, setSrc]);
+  }, [file, imageRef, scale, setSize, setSrc]);
 };

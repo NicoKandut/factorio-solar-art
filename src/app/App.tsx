@@ -17,7 +17,7 @@ import { Config } from "../types/ui";
 import "./App.css";
 
 const initialConfig: Config = {
-  scale: 6,
+  scale: 1,
   threshold: 0.5,
   transparency: true,
   roboports: true,
@@ -57,7 +57,7 @@ export const App = () => {
     [blueprint, name]
   );
   const [importableText, setImportableText] = useState("");
-  useImageLoader(imageRef, file, setImageSrc, setSize);
+  useImageLoader(imageRef, file, config.scale, setImageSrc, setSize);
   useBlueprintCalculation(imageRef, size, config, setBlueprint);
   useBlueprintSerializer(namedBlueprint, setImportableText);
   const tilesPerPixel = config.mods.spaceExploration

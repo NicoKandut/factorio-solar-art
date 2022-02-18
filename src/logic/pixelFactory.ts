@@ -7,6 +7,7 @@ import type {
 import {
   SE_TILE_SIZE_PYLON,
   SE_TILE_SIZE_SOLAR_PANEL,
+  SE_TILE_SIZE_SUPERCHARGER,
   TILES_PER_PIXEL,
   TILE_SIZE_ACCUMULATOR,
   TILE_SIZE_RADAR,
@@ -49,6 +50,7 @@ const sizes: Record<EntityType, number> = {
   "se-pylon-substation": SE_TILE_SIZE_PYLON,
   "se-pylon-construction": SE_TILE_SIZE_PYLON,
   "se-pylon-construction-radar-roboport": SE_TILE_SIZE_PYLON,
+  "se-supercharger": SE_TILE_SIZE_SUPERCHARGER,
 };
 
 const entityTypeToTile: Record<Exclude<PixelType, "transparent">, TileType> = {

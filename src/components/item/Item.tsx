@@ -35,6 +35,7 @@ const itemUrls: Record<Items, string> = {
     process.env.PUBLIC_URL + "/images/pylon-construction.png",
   "se-pylon-construction-radar-roboport":
     process.env.PUBLIC_URL + "/images/pylon-construction-radar.png",
+  "se-supercharger": process.env.PUBLIC_URL + "/images/supercharger.png",
 };
 
 export const Item = (props: Props) => {

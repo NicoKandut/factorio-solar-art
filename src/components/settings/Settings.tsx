@@ -1,5 +1,6 @@
 import type { Config } from "../../types/ui";
 import { Checkbox } from "../checkbox/Checkbox";
+import { Numberbox } from "../numberbox/Numberbox";
 import { Slider } from "../slider/Slider";
 import { Textbox } from "../textbox/Textbox";
 import "./Settings.css";
@@ -67,6 +68,12 @@ export const Settings = (props: Props) => {
       >
         <label>Contrast</label>
       </Slider>
+      <Numberbox
+        label="Scale"
+        value={config.scale}
+        setValue={(v) => setConfig({ ...config, scale: v })}
+        hint="Scale the resulting blueprint."
+      ></Numberbox>
       <Checkbox
         value={config.mods.spaceExploration}
         setValue={(v) =>

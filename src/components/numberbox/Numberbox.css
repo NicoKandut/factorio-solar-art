@@ -1,0 +1,19 @@
+.numberbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-inline);
+}
+
+.numberbox-input {
+  /* reset */
+  color: black;
+  border: none;
+
+  /* layout */
+  padding: var(--spacing-inline);
+  border-radius: var(--rounding);
+
+  /* theming */
+  background-color: var(--weird-cream);
+  box-shadow: var(--shadow-cutout);
+}

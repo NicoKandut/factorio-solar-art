@@ -9,7 +9,8 @@ export type EntityType =
   | "se-space-accumulator-2"
   | "se-pylon-substation"
   | "se-pylon-construction"
-  | "se-pylon-construction-radar-roboport";
+  | "se-pylon-construction-radar-roboport"
+  | "se-supercharger";
 
 export type TileType = "stone-path" | "refined-concrete";
 
@@ -80,6 +81,7 @@ export const sizes: Record<EntityType | TileType, number> = {
   "se-pylon-substation": 2,
   "se-pylon-construction": 2,
   "se-pylon-construction-radar-roboport": 2,
+  "se-supercharger": 4,
 };
 
 export const entityColors: Record<ExtendedEntityType, string> = {
@@ -98,4 +100,5 @@ export const entityColors: Record<ExtendedEntityType, string> = {
   "se-pylon-substation": "rgb(0, 93, 148)",
   "se-pylon-construction": "rgb(214, 206, 132)",
   "se-pylon-construction-radar-roboport": "rgb(214, 206, 132)",
+  "se-supercharger": "rgb(214, 206, 132)",
 };

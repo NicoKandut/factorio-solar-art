@@ -24,6 +24,7 @@ export const Preview = (props: Props) => {
   const wallsRef = useRef<HTMLCanvasElement>(null);
   const radarRef = useRef<HTMLCanvasElement>(null);
   const stonePathRef = useRef<HTMLCanvasElement>(null);
+  const chargerRef = useRef<HTMLCanvasElement>(null);
 
   const offset = { x: Math.floor(width / 2), y: Math.floor(height / 2) };
 
@@ -64,6 +65,12 @@ export const Preview = (props: Props) => {
       entities,
       radarRef.current,
       useSpaceExploration ? "se-pylon-construction-radar-roboport" : "radar",
+      offset
+    ),
+    useCachedEntityCanvas(
+      entities,
+      radarRef.current,
+      "se-supercharger",
       offset
     ),
   ];
@@ -121,6 +128,14 @@ export const Preview = (props: Props) => {
         width={width}
         height={height}
       />
+      {useSpaceExploration ? (
+        <canvas
+          ref={chargerRef}
+          className="layer charger"
+          width={width}
+          height={height}
+        />
+      ) : null}
     </div>
   );
 };
