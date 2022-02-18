@@ -27,7 +27,7 @@ export const SE_TILE_SIZE_PYLON = 2;
 export const SE_TILE_SIZE_SUPERCHARGER = 4;
 
 export const SE_TILE_RANGE_RADAR_PYLON = 256;
-export const SE_TILE_RANGE_POWER_PYLON = 64 / 2; // halfed for better building performace
+export const SE_TILE_RANGE_POWER_PYLON = 64 / 2; // halfed because the next one needs to be in building range
 export const SE_TILE_RANGE_SUPERCHARGER = 128;
 
 export const SE_PIXEL_RANGE_RADAR_PYLON =

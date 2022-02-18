@@ -4,6 +4,7 @@
 
 ### Added
 
+- experimental image scaling
 - experimental support for space exploration mod
 
 ## v1.2 17.02.2022
