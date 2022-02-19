@@ -7,6 +7,10 @@
 - experimental image scaling
 - experimental support for space exploration mod
 
+### Changed
+
+- luminosity calculation
+
 ## v1.2 17.02.2022
 
 ### Added
