@@ -1,3 +1,4 @@
+import { PreviewCollector } from "../png/PreviewCollector";
 import {
   SE_PIXEL_RADIUS_POWER_PYLON,
   SE_PIXEL_RADIUS_SUPERCHARGER,
@@ -57,6 +58,7 @@ export const createSePixel = (
   type: PixelType,
   x: number,
   y: number,
+  preview: PreviewCollector,
   options: Options
 ) => {
   if (type === "transparent") {
@@ -75,6 +77,7 @@ export const createSePixel = (
         y: options.offsetY + y + 1,
       },
     });
+    preview.writeRect("se-supercharger", x, y);
     return pixel;
   }
 
@@ -87,6 +90,7 @@ export const createSePixel = (
         y: options.offsetY + y,
       },
     });
+    preview.writeRect("se-pylon-substation", x, y);
 
     if (options.tiles) {
       const tileType =
@@ -100,6 +104,7 @@ export const createSePixel = (
             y: options.offsetY + y + yi - 1,
           },
         });
+        preview.writePixel(tileType, x + xi, y + yi);
       });
     } else {
       pixel.entities.push({
@@ -118,6 +123,8 @@ export const createSePixel = (
           y: options.offsetY + y + 2,
         },
       });
+      preview.writeRect("se-space-accumulator-2", x + 2, y);
+      preview.writeRect("se-space-accumulator-2", x, y + 2);
     }
 
     if (options.radar) {
@@ -129,6 +136,7 @@ export const createSePixel = (
           y: options.offsetY + y + 2,
         },
       });
+      preview.writeRect("se-pylon-construction-radar-roboport", x + 2, y + 2);
     } else {
       pixel.entities.push({
         entity_number: idGenerator.next().value,
@@ -138,6 +146,7 @@ export const createSePixel = (
           y: options.offsetY + y + 2,
         },
       });
+      preview.writeRect("se-pylon-construction", x + 2, y + 2);
     }
 
     return pixel;
@@ -154,8 +163,8 @@ export const createSePixel = (
             y: options.offsetY + y + yi,
           },
         });
+        preview.writeRect("se-space-accumulator-2", x + xi, y + yi);
       });
-
       break;
     case "solar-panel":
       pixel.entities.push({
@@ -166,6 +175,7 @@ export const createSePixel = (
           y: options.offsetY + y + 1,
         },
       });
+      preview.writeRect("se-space-solar-panel-3", x, y);
       break;
     case "stone-wall":
       for (let iy = 0; iy < SE_TILES_PER_PIXEL; iy++) {
@@ -178,8 +188,12 @@ export const createSePixel = (
               y: options.offsetY + y + iy - 1,
             },
           });
+          preview.writePixel(type, x + ix, y + iy);
         }
       }
+      break;
+    default:
+    // never happens
   }
 
   return pixel;

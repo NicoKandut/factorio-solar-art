@@ -1,3 +1,4 @@
+import { PreviewCollector } from "../png/PreviewCollector";
 import type {
   EntityType,
   FactorioEntity,
@@ -134,6 +135,7 @@ export const createPixel = (
   type: PixelType,
   x: number,
   y: number,
+  preview: PreviewCollector,
   options: Options
 ): Pixel => {
   if (type === "transparent") {
@@ -153,6 +155,7 @@ export const createPixel = (
         y: options.offsetY + y,
       },
     });
+    preview.writeRect("substation", x, y);
   }
 
   if (options.roboport) {
@@ -164,6 +167,7 @@ export const createPixel = (
         y: options.offsetY + y + 3,
       },
     });
+    preview.writeRect("roboport", x + 2, y + 2);
   } else if (options.radar) {
     pixel.entities.push({
       entity_number: idGenerator.next().value,
@@ -173,6 +177,7 @@ export const createPixel = (
         y: options.offsetY + y + 3,
       },
     });
+    preview.writeRect("radar", x + 3, y + 3);
   }
 
   if (options.tiles) {
@@ -189,13 +194,15 @@ export const createPixel = (
         ? TILES_RADAR_ON_ACCUMULATOR
         : [];
     tiles.forEach(([tileX, tileY]) => {
+      const name = entityTypeToTile[type];
       pixel.tiles.push({
-        name: entityTypeToTile[type],
+        name,
         position: {
           x: options.offsetX + x + tileX - 1,
           y: options.offsetY + y + tileY - 1,
         },
       });
+      preview.writePixel(name, x + tileX, y + tileY);
     });
   }
 
@@ -227,6 +234,7 @@ export const createPixel = (
           y: options.offsetY + entityOffset[type] + y + yi,
         },
       });
+      preview.writeRect(type, x + xi, y + yi);
     }
   }
 

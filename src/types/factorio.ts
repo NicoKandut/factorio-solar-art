@@ -14,12 +14,6 @@ export type EntityType =
 
 export type TileType = "stone-path" | "refined-concrete";
 
-export type ExtendedEntityType =
-  | EntityType
-  | TileType
-  | "transparent"
-  | "ground";
-
 export interface FactorioColor {
   r: number;
   g: number;
@@ -84,21 +78,38 @@ export const sizes: Record<EntityType | TileType, number> = {
   "se-supercharger": 4,
 };
 
-export const entityColors: Record<ExtendedEntityType, string> = {
-  accumulator: "#787A78",
-  "solar-panel": "#182020",
-  substation: "rgb(0, 93, 148)",
-  roboport: "rgb(214, 206, 132)",
-  "stone-path": "#52514A",
-  "refined-concrete": "rgb(49, 50, 42)",
-  ground: "rgb(140, 105, 58)",
-  transparent: "transparent",
-  "stone-wall": "rgb(217, 216, 207)",
-  radar: "#006090",
-  "se-space-solar-panel-3": "#182020",
-  "se-space-accumulator-2": "#787A78",
-  "se-pylon-substation": "rgb(0, 93, 148)",
-  "se-pylon-construction": "rgb(214, 206, 132)",
-  "se-pylon-construction-radar-roboport": "rgb(214, 206, 132)",
-  "se-supercharger": "rgb(214, 206, 132)",
+/**
+ * Maps an factorio item to a palette color index
+ */
+export const paletteIndexOf: Record<EntityType | TileType, number> = {
+  "stone-wall": 1,
+  accumulator: 2,
+  "se-space-accumulator-2": 2,
+  "stone-path": 3,
+  "refined-concrete": 4,
+  roboport: 5,
+  "se-pylon-construction": 5,
+  "se-pylon-construction-radar-roboport": 5,
+  "se-supercharger": 5,
+  substation: 6,
+  "se-pylon-substation": 6,
+  radar: 7,
+  "solar-panel": 8,
+  "se-space-solar-panel-3": 8,
 };
+
+/**
+ * Sets the colors associated with each palette index
+ * @see paletteIndexOf how to get those indices
+ */
+export const palette: number[][] = [
+  [0, 0, 0, 0],
+  [217, 216, 207, 255],
+  [120, 122, 120, 255],
+  [82, 81, 74, 255],
+  [49, 50, 42, 255],
+  [214, 206, 132, 255],
+  [0, 93, 148, 255],
+  [0, 96, 144, 255],
+  [24, 32, 32, 255],
+];

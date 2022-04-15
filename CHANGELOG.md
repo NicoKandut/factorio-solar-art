@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.4 15.04.2022
+
+### Added
+
+- size displays
+-
+
+### Changed
+
+- preview rendering
+
 ## v1.3 18.02.2022
 
 ### Added

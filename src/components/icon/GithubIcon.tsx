@@ -4,7 +4,6 @@ const GithubIcon = () => {
       height="16"
       aria-hidden="true"
       viewBox="0 0 16 16"
-      version="1.1"
       width="16"
       data-view-component="true"
       style={{ fill: "currentcolor", minWidth: "16px" }}

@@ -3,7 +3,6 @@ import { Button } from "../components/button/Button";
 import { CopyButton } from "../components/copybutton/CopyButton";
 import Header from "../components/header/Header";
 import { CenteredLoader } from "../components/loader/Loader";
-import { Preview } from "../components/preview/Preview";
 import { Section } from "../components/section/Section";
 import { Settings } from "../components/settings/Settings";
 import { Statistics } from "../components/statistics/Statistics";
@@ -46,6 +45,8 @@ export const App = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [blueprint, setBlueprint] = useState<FactorioBlueprint | null>(null);
+  const [importableText, setImportableText] = useState("");
+  const [previewSrc, setPreviewSrc] = useState("");
 
   const namedBlueprint: FactorioBlueprint | null = useMemo(
     () =>
@@ -56,9 +57,9 @@ export const App = () => {
         : null,
     [blueprint, name]
   );
-  const [importableText, setImportableText] = useState("");
+
   useImageLoader(imageRef, file, config.scale, setImageSrc, setSize);
-  useBlueprintCalculation(imageRef, size, config, setBlueprint);
+  useBlueprintCalculation(imageRef, size, config, setBlueprint, setPreviewSrc);
   useBlueprintSerializer(namedBlueprint, setImportableText);
   const tilesPerPixel = config.mods.spaceExploration
     ? SE_TILES_PER_PIXEL
@@ -67,8 +68,7 @@ export const App = () => {
   return (
     <div className="app">
       <Header className="area-header" />
-      <Section className="area-settings">
-        <span>Settings</span>
+      <Section title="Settings" className="area-settings">
         <Settings
           config={config}
           setConfig={setConfig}
@@ -77,22 +77,27 @@ export const App = () => {
         />
       </Section>
 
-      <Section className="area-source">
-        <span>Source</span>
+      <Section title="Source" className="area-source">
         {file && (
-          <Button
-            title="Reset"
-            className="clear-button"
-            onClick={() => {
-              setFile(null);
-              setImageSrc("");
-              setSize({ width: 0, height: 0 });
-              setBlueprint(null);
-              setImportableText("");
-            }}
-          >
-            <span className="material-icons">clear</span>
-          </Button>
+          <>
+            <small>
+              {size.width} x {size.height} px
+            </small>
+            <Button
+              title="Reset"
+              className="clear-button"
+              onClick={() => {
+                setFile(null);
+                setImageSrc("");
+                setSize({ width: 0, height: 0 });
+                setBlueprint(null);
+                setImportableText("");
+                setPreviewSrc("");
+              }}
+            >
+              <span className="material-icons">clear</span>
+            </Button>
+          </>
         )}
         {file ? (
           <img
@@ -106,10 +111,12 @@ export const App = () => {
         )}
       </Section>
 
-      <Section className="area-preview">
-        <span>Preview</span>
+      <Section title="Preview" className="area-preview">
         {file && (
           <>
+            <small>
+              {size.width * tilesPerPixel} x {size.height * tilesPerPixel} tiles
+            </small>
             <CopyButton text={importableText} icons={copyButtonIcons} />
             <Button
               title="Recalculate"
@@ -122,20 +129,12 @@ export const App = () => {
 
         {file && !blueprint ? (
           <CenteredLoader />
-        ) : (
-          <Preview
-            entities={blueprint?.blueprint?.entities || []}
-            tiles={blueprint?.blueprint.tiles || []}
-            width={size.width * tilesPerPixel}
-            height={size.height * tilesPerPixel}
-            useSpaceExploration={config.mods.spaceExploration}
-          />
-        )}
+        ) : previewSrc ? (
+          <img src={previewSrc} alt="preview" className="source-image" />
+        ) : null}
       </Section>
 
-      <Section className="area-statistics">
-        <span>Statistics</span>
-
+      <Section title="Statistics" className="area-statistics">
         <Statistics
           blueprint={blueprint}
           useSpaceExploration={config.mods.spaceExploration}

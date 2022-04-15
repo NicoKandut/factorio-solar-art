@@ -3,21 +3,19 @@ import "./Section.css";
 
 interface Props {
   className?: string;
-  children:
-    | [React.ReactNode, React.ReactNode]
-    | [React.ReactNode, React.ReactNode, React.ReactNode];
+  title: string;
+  children: React.ReactNode | [React.ReactNode, React.ReactNode];
 }
 
 export const Section = (props: Props) => {
-  const { children, className } = props;
-  const header = children[0];
-  const actions = children.length === 3 ? children[1] : null;
-  const content = children.length === 3 ? children[2] : children[1];
+  const { title, children, className } = props;
+  const actions = Array.isArray(children) ? children[0] : null;
+  const content = Array.isArray(children) ? children[1] : children;
 
   return (
     <section className={combine("section", className)}>
       <div className="section-title">
-        {header}
+        <span>{title}</span>
         <div className="section-spacer" />
         {actions}
       </div>

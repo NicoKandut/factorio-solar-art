@@ -1,3 +1,5 @@
+import { PngWriter } from "../png/PngWriter";
+import { PreviewCollector } from "../png/PreviewCollector";
 import { FactorioBlueprint } from "../types/factorio";
 import { Config } from "../types/ui";
 import {
@@ -25,7 +27,7 @@ export const calculateBlueprint = async (
   size: { width: number; height: number },
   config: Config
 ) => {
-  const then = performance.now();
+  const calc_from = performance.now();
 
   resetIdGenerator();
 
@@ -48,6 +50,8 @@ export const calculateBlueprint = async (
   const tileOffsetX = -Math.floor(tileWidth / 2);
   const tileOffsetY = -Math.floor(tileHeight / 2);
 
+  const collector = new PreviewCollector(tileWidth, tileHeight);
+
   for (
     let pixelY = 0, tileY = 0;
     pixelY < size.height;
@@ -63,7 +67,7 @@ export const calculateBlueprint = async (
       const type = mapColor(color, config);
 
       const pixel = config.mods.spaceExploration
-        ? createSePixel(type, tileX, tileY, {
+        ? createSePixel(type, tileX, tileY, collector, {
             tiles: config.tiles,
             power: seNeedsPowerPylon(pixelX, pixelY),
             radar: seNeedsRadarPylon(pixelX, pixelY),
@@ -71,7 +75,7 @@ export const calculateBlueprint = async (
             offsetX: tileOffsetX,
             offsetY: tileOffsetY,
           })
-        : createPixel(type, tileX, tileY, {
+        : createPixel(type, tileX, tileY, collector, {
             tiles: config.tiles,
             substation: needsSubstation(pixelX, pixelY),
             roboport: config.roboports && needsRoboPort(pixelX, pixelY),
@@ -85,9 +89,24 @@ export const calculateBlueprint = async (
     }
   }
 
-  const now = performance.now();
+  const calc_to = performance.now();
+  const png_from = performance.now();
 
-  console.log(`Calculating blueprint: ${Math.round(now - then)} ms`);
+  const writer = new PngWriter();
+  writer.writeImage(tileWidth, tileHeight, collector.data);
+  const previewUrl = writer.getUrl();
 
-  return blueprint;
+  const png_to = performance.now();
+
+  console.group(
+    "%c[PERFORMANCE]%c %d ms",
+    "color: dodgerblue; font-weight: bold;",
+    "color: inherit; font-weight: inherit;",
+    png_to - calc_from
+  );
+  console.log("blueprint: %d ms", calc_to - calc_from);
+  console.log("      png: %d ms", png_to - png_from);
+  console.groupEnd();
+
+  return [blueprint, previewUrl] as const;
 };
