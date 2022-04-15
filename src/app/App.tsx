@@ -130,7 +130,7 @@ export const App = () => {
         {file && !blueprint ? (
           <CenteredLoader />
         ) : previewSrc ? (
-          <img src={previewSrc} alt="preview" className="source-image" />
+          <img src={previewSrc} alt="preview" className="preview-image" />
         ) : null}
       </Section>
 

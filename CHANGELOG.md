@@ -5,11 +5,17 @@
 ### Added
 
 - size displays
--
+- exact contrast input
 
 ### Changed
 
 - preview rendering
+- zero handling in number inputs
+
+### Fixed
+
+- discord link
+- radar rendering
 
 ## v1.3 18.02.2022
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Textbox.css";
 
 interface Props {
@@ -10,8 +10,13 @@ interface Props {
 
 export const Textbox = (props: Props) => {
   const { value, setValue, label, hint } = props;
-
   const [internalValue, setInternalValue] = useState(value);
+
+  useEffect(() => {
+    if (value !== internalValue) setInternalValue(value);
+    // this is intentional
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <label className="textbox" title={hint}>

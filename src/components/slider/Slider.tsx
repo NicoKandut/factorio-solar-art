@@ -1,4 +1,5 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
+import NumberInput from "../numberbox/NumberInput";
 import "./Slider.css";
 
 interface Props {
@@ -12,8 +13,13 @@ interface Props {
 
 export const Slider = (props: PropsWithChildren<Props>) => {
   const { value, setValue, min, max, step, children, hint } = props;
-
   const [internalValue, setInternalValue] = useState(value);
+
+  useEffect(() => {
+    if (value !== internalValue) setInternalValue(value);
+    // this is intentional
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
     <label className="slider" title={hint}>
@@ -27,6 +33,12 @@ export const Slider = (props: PropsWithChildren<Props>) => {
         step={step}
         onChange={(e) => setInternalValue(Number(e.target.value))}
         onMouseUp={() => setValue(internalValue)}
+        onBlur={() => setValue(internalValue)}
+      />
+      <NumberInput
+        className="slider-exact-input"
+        value={internalValue}
+        setValue={setValue}
       />
     </label>
   );

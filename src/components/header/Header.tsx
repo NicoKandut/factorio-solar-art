@@ -22,8 +22,13 @@ const Header = ({ className }: { className?: string }) => {
       <Button
         title="Changelog"
         onClick={() => {
-          window.location.href =
-            "https://github.com/NicoKandut/factorio-solar-art/blob/main/CHANGELOG.md";
+          //@ts-ignore
+          window
+            .open(
+              "https://github.com/NicoKandut/factorio-solar-art/blob/main/CHANGELOG.md",
+              "_newtab"
+            )
+            .focus();
         }}
       >
         <span className="material-icons">feed</span>
@@ -31,8 +36,10 @@ const Header = ({ className }: { className?: string }) => {
       <Button
         title="Github Repository"
         onClick={() => {
-          window.location.href =
-            "https://github.com/NicoKandut/factorio-solar-art";
+          //@ts-ignore
+          window
+            .open("https://github.com/NicoKandut/factorio-solar-art", "_newtab")
+            .focus();
         }}
       >
         <GithubIcon />
@@ -40,7 +47,8 @@ const Header = ({ className }: { className?: string }) => {
       <Button
         title="Discord Server"
         onClick={() => {
-          window.location.href = "https://discord.gg/2Sh3QTAY";
+          //@ts-ignore
+          window.open("https://discord.gg/jPf45KS54t", "_newtab").focus();
         }}
       >
         <span className="material-icons">discord</span>

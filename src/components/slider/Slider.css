@@ -7,3 +7,19 @@
 .slider-input {
   accent-color: var(--accent-color);
 }
+
+.slider-exact-input {
+/* reset */
+border: none;
+
+/* layout */
+padding: var(--spacing-inline);
+border-radius: var(--rounding);
+
+/* theming */
+color: var(--text);
+background-color: transparent;
+width: 2rem;
+/* background-color: var(--weird-cream); */
+/* box-shadow: var(--shadow-cutout); */
+}
