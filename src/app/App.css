@@ -121,6 +121,11 @@
   max-height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
-  background-color: rgb(140, 105, 58);
+  background-color: var(--ground);
   border-radius: var(--rounding);
+}
+
+.size-warning {
+  color: var(--negative);
+  font-size: 24px;
 }

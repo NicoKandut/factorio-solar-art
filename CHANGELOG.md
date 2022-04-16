@@ -2,6 +2,10 @@
 
 ## v1.5 16.04.2022
 
+### Added
+
+- size warning above 800px
+
 ### Changed
 
 - moved blueprint string calculation to copy button

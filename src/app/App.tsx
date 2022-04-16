@@ -80,6 +80,14 @@ export const App = () => {
             <small>
               {size.width} x {size.height} px
             </small>
+            {size.width > 800 || size.height > 800 ? (
+              <span
+                className="material-icons size-warning"
+                title="Large sizes will lead to long loading times or crashes."
+              >
+                warning
+              </span>
+            ) : null}
             <Button
               title="Reset"
               className="clear-button"
