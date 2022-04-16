@@ -1,14 +1,28 @@
 # Factorio Solar Art Generator
 
-This is a small web application that converts pictures into blueprints for huge solar farms.
+This is a web application that converts pictures into blueprints for huge solar farms.
 
-Try to keep the pictures small (up to 900x900 should be fine). The app struggles with larger images.
+You can use it here: [https://nicokandut.github.io/factorio-solar-art](https://nicokandut.github.io/factorio-solar-art)
+
+I also set up a discord to share blueprints, talk about bugs and new features etc: [https://discord.com/invite/jPf45KS54t](https://discord.com/invite/jPf45KS54t)
 
 # Example
 
 ![example](./.github/example.png)
 
-# Install the app for offline use
+# Known Issues
 
-This app is a PWA (Progressive web app) which means you can install it like any other application.
-The benefit of installing it is that you can use it offline.
+Help is welcome with these:
+
+- The app cannot handle images that exceed 900x900 pixels because the resulting string for factorio would be too big.
+- When the image uses transparency, some entities on the edges can be unpowered.
+
+# Installation (optional)
+
+The only benefit of installation is that you can use the app offline.
+
+[How to install](https://support.google.com/chrome/answer/9658361?hl=en&co=GENIE.Platform%3DDesktop)
+
+# Special Thanks
+
+- [msarchet](https://github.com/msarchet) for more realistic luminosity calculation
