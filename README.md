@@ -2,7 +2,7 @@
 
 This is a small web application that converts pictures into blueprints for huge solar farms.
 
-Try to keep the pictures small (up to 400x400 should be fine). The app struggles with larger images.
+Try to keep the pictures small (up to 900x900 should be fine). The app struggles with larger images.
 
 # Example
 

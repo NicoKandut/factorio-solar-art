@@ -27,7 +27,7 @@ export const calculateBlueprint = async (
   size: { width: number; height: number },
   config: Config
 ) => {
-  const calc_from = performance.now();
+  const then = performance.now();
 
   resetIdGenerator();
 
@@ -89,24 +89,13 @@ export const calculateBlueprint = async (
     }
   }
 
-  const calc_to = performance.now();
-  const png_from = performance.now();
-
   const writer = new PngWriter();
   writer.writeImage(tileWidth, tileHeight, collector.data);
   const previewUrl = writer.getUrl();
 
-  const png_to = performance.now();
+  const now = performance.now();
 
-  console.group(
-    "%c[PERFORMANCE]%c %d ms",
-    "color: dodgerblue; font-weight: bold;",
-    "color: inherit; font-weight: inherit;",
-    png_to - calc_from
-  );
-  console.log("blueprint: %d ms", calc_to - calc_from);
-  console.log("      png: %d ms", png_to - png_from);
-  console.groupEnd();
+  console.debug("calculation time: %d ms", now - then);
 
   return [blueprint, previewUrl] as const;
 };

@@ -8,7 +8,6 @@ import { Settings } from "../components/settings/Settings";
 import { Statistics } from "../components/statistics/Statistics";
 import { UploadArea } from "../components/uploadarea/UploadArea";
 import { useBlueprintCalculation } from "../hooks/useBlueprintCalculation";
-import { useBlueprintSerializer } from "../hooks/useBlueprintSerializer";
 import { useImageLoader } from "../hooks/useImageLoader";
 import { SE_TILES_PER_PIXEL, TILES_PER_PIXEL } from "../logic/constants";
 import { FactorioBlueprint } from "../types/factorio";
@@ -45,7 +44,6 @@ export const App = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [blueprint, setBlueprint] = useState<FactorioBlueprint | null>(null);
-  const [importableText, setImportableText] = useState("");
   const [previewSrc, setPreviewSrc] = useState("");
 
   const namedBlueprint: FactorioBlueprint | null = useMemo(
@@ -60,7 +58,6 @@ export const App = () => {
 
   useImageLoader(imageRef, file, config.scale, setImageSrc, setSize);
   useBlueprintCalculation(imageRef, size, config, setBlueprint, setPreviewSrc);
-  useBlueprintSerializer(namedBlueprint, setImportableText);
   const tilesPerPixel = config.mods.spaceExploration
     ? SE_TILES_PER_PIXEL
     : TILES_PER_PIXEL;
@@ -91,7 +88,6 @@ export const App = () => {
                 setImageSrc("");
                 setSize({ width: 0, height: 0 });
                 setBlueprint(null);
-                setImportableText("");
                 setPreviewSrc("");
               }}
             >
@@ -117,7 +113,7 @@ export const App = () => {
             <small>
               {size.width * tilesPerPixel} x {size.height * tilesPerPixel} tiles
             </small>
-            <CopyButton text={importableText} icons={copyButtonIcons} />
+            <CopyButton blueprint={namedBlueprint} icons={copyButtonIcons} />
             <Button
               title="Recalculate"
               onClick={() => setConfig({ ...config })}

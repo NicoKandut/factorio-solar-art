@@ -1,11 +1,13 @@
 import { ReactNode, useEffect, useState } from "react";
 import { combine } from "../../logic/classnames";
+import { encode } from "../../logic/serialization";
+import { FactorioBlueprint } from "../../types/factorio";
 import { Button } from "../button/Button";
 
 const stateTimeout = 1000;
 
 interface Props {
-  text: string;
+  blueprint: FactorioBlueprint | null;
   icons: {
     success: ReactNode;
     error: ReactNode;
@@ -17,7 +19,7 @@ interface Props {
 type State = "default" | "success" | "error";
 
 export const CopyButton = (props: Props) => {
-  const { text, icons, className = "" } = props;
+  const { blueprint, icons, className = "" } = props;
 
   const [state, setState] = useState<State>("default");
 
@@ -34,10 +36,24 @@ export const CopyButton = (props: Props) => {
       title="Copy Blueprint"
       className={combine("copy-button", className)}
       onClick={() => {
-        navigator.clipboard
-          .writeText(text)
-          .then(() => setState("success"))
-          .catch(() => setState("error"));
+        if (!blueprint) return;
+
+        try {
+          const importableString = encode(blueprint);
+          navigator.clipboard
+            .writeText(importableString)
+            .then(() => setState("success"))
+            .catch((e) => {
+              throw e;
+            });
+        } catch (e) {
+          if (e instanceof RangeError) {
+            console.error("Blueprint is too large to process");
+          } else {
+            console.error("Unexpected error while copying:", e);
+          }
+          setState("error");
+        }
       }}
     >
       {icons[state]}

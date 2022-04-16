@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.5 16.04.2022
+
+### Changed
+
+- moved blueprint string calculation to copy button
+
+# Changelog
+
 ## v1.4 15.04.2022
 
 ### Added
