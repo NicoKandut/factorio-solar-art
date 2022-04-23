@@ -27,8 +27,8 @@ export const useImageLoader = (
 
       const listener = (event: Event) => {
         const image = event.target as HTMLImageElement;
-        const width = image.naturalWidth * scale;
-        const height = image.naturalHeight * scale;
+        const width = Math.round(image.naturalWidth * scale);
+        const height = Math.round(image.naturalHeight * scale);
 
         sharedCanvas.width = width;
         sharedCanvas.height = height;
