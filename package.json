@@ -1,7 +1,7 @@
 {
   "homepage": "https://nicokandut.github.io/factorio-solar-art",
   "name": "factorio-solar-art-generator",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "private": true,
   "dependencies": {
     "@sentry/react": "^6.17.7",

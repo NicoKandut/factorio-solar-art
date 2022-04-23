@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.5.1 23.04.2022
+
+### Fixed
+
+- skewed images with fractional widths
+
 ## v1.5 16.04.2022
 
 ### Added

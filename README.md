@@ -16,7 +16,6 @@ Help is welcome with these:
 
 - The app cannot handle images that exceed 900x900 pixels because the resulting string for factorio would be too big.
 - When the image uses transparency, some entities on the edges can be unpowered.
-- If scaling results in fractional width or height, the image is skewed.
 
 # Installation (optional)
 
@@ -27,3 +26,4 @@ The only benefit of installation is that you can use the app offline.
 # Special Thanks
 
 - [msarchet](https://github.com/msarchet) for more realistic luminosity calculation
+- [alexgorbatchev](https://github.com/alexgorbatchev) for his crc implementation

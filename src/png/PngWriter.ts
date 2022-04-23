@@ -37,8 +37,8 @@ for (let i = 0; i < palette.length; ++i) {
 }
 
 export class PngWriter {
-  offset: number = 0;
-  array: Uint8Array = new Uint8Array();
+  private offset: number = 0;
+  private array: Uint8Array = new Uint8Array();
 
   /**
    * Return a usable url to the generated PNG
