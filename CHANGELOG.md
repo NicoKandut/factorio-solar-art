@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.6.0 01.05.2022
+
+### Added
+
+- experimental download button for chrome
+- tests
+
+### Changed
+
+- layout of items in statistics
+
+### Removed
+
+- reload button for preview
+
 ## v1.5.1 23.04.2022
 
 ### Fixed

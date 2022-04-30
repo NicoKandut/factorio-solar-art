@@ -25,6 +25,7 @@
 
 .button span {
   font-size: 16px;
+  user-select: none;
 }
 
 .button:hover {

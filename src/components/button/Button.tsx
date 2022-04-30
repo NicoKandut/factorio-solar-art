@@ -1,20 +1,18 @@
-import React, { PropsWithChildren } from "react";
-import { combine } from "../../logic/classnames";
+import { PropsWithChildren } from "react";
 import "./Button.css";
 
 interface Props {
   onClick: () => void;
-  className?: string;
   title: string;
 }
 
 export const Button = (props: PropsWithChildren<Props>) => {
-  const { children, className, onClick, title } = props;
+  const { children, onClick, title } = props;
 
   return (
     <button
       onClick={onClick}
-      className={combine("button", className)}
+      className="button"
       title={title}
     >
       {children}

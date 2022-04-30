@@ -6,6 +6,7 @@
 
 .slider-input {
   accent-color: var(--accent-color);
+  width: fill-available;
 }
 
 .slider-exact-input {

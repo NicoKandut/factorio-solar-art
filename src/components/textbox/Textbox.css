@@ -12,6 +12,7 @@
   /* layout */
   padding: var(--spacing-inline);
   border-radius: var(--rounding);
+  width: fill-available;
 
   /* theming */
   background-color: var(--weird-cream);

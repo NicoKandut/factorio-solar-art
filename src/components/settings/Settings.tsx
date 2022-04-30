@@ -26,35 +26,35 @@ export const Settings = (props: Props) => {
       <Checkbox
         value={config.transparency}
         setValue={(v) => setConfig({ ...config, transparency: v })}
-        hint="When enabled, transparent parts of the image will be empty in the blueprint."
+        title="When enabled, transparent parts of the image will be empty in the blueprint."
       >
         <label>Use Transparency</label>
       </Checkbox>
       <Checkbox
         value={config.tiles}
         setValue={(v) => setConfig({ ...config, tiles: v })}
-        hint="When enabled, the blueprint will use tiles to fill in the gaps."
+        title="When enabled, the blueprint will use tiles to fill in the gaps."
       >
         <label>Use Tiles</label>
       </Checkbox>
       <Checkbox
         value={config.walls}
         setValue={(v) => setConfig({ ...config, walls: v })}
-        hint="When enabled, the blueprint will use walls for white areas."
+        title="When enabled, the blueprint will use walls for white areas."
       >
         <label>Use Walls</label>
       </Checkbox>
       <Checkbox
         value={config.roboports}
         setValue={(v) => setConfig({ ...config, roboports: v })}
-        hint="When enabled, the blueprint will ensure logistic network coverage across the whole blueprint."
+        title="When enabled, the blueprint will ensure logistic network coverage across the whole blueprint."
       >
         <label>Use Roboports</label>
       </Checkbox>
       <Checkbox
         value={config.radars}
         setValue={(v) => setConfig({ ...config, radars: v })}
-        hint="When enabled, the blueprint will ensure radar coverage."
+        title="When enabled, the blueprint will ensure radar coverage."
       >
         <label>Use Radars</label>
       </Checkbox>
@@ -82,7 +82,7 @@ export const Settings = (props: Props) => {
             mods: { ...config.mods, spaceExploration: v },
           })
         }
-        hint="When enabled, the blueprint will use items from space exploration."
+        title="When enabled, the blueprint will use items from space exploration."
       >
         <label>[MOD] Space Exploration</label>
       </Checkbox>

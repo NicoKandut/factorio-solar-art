@@ -4,8 +4,8 @@
 }
 
 .item-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
   padding-block: var(--spacing-inline);
   gap: var(--grid-spacing);
 }

@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from "react";
-import { combine } from "../../logic/classnames";
 import { encode } from "../../logic/serialization";
 import { FactorioBlueprint } from "../../types/factorio";
 import { Button } from "../button/Button";
@@ -13,13 +12,12 @@ interface Props {
     error: ReactNode;
     default: ReactNode;
   };
-  className?: string;
 }
 
 type State = "default" | "success" | "error";
 
 export const CopyButton = (props: Props) => {
-  const { blueprint, icons, className = "" } = props;
+  const { blueprint, icons } = props;
 
   const [state, setState] = useState<State>("default");
 
@@ -34,7 +32,6 @@ export const CopyButton = (props: Props) => {
   return (
     <Button
       title="Copy Blueprint"
-      className={combine("copy-button", className)}
       onClick={() => {
         if (!blueprint) return;
 

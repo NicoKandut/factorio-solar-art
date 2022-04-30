@@ -10,6 +10,7 @@ import { UploadArea } from "../components/uploadarea/UploadArea";
 import { useBlueprintCalculation } from "../hooks/useBlueprintCalculation";
 import { useImageLoader } from "../hooks/useImageLoader";
 import { SE_TILES_PER_PIXEL, TILES_PER_PIXEL } from "../logic/constants";
+import { encode } from "../logic/serialization";
 import { FactorioBlueprint } from "../types/factorio";
 import { Config } from "../types/ui";
 import "./App.css";
@@ -90,7 +91,6 @@ export const App = () => {
             ) : null}
             <Button
               title="Reset"
-              className="clear-button"
               onClick={() => {
                 setFile(null);
                 setImageSrc("");
@@ -122,12 +122,32 @@ export const App = () => {
               {size.width * tilesPerPixel} x {size.height * tilesPerPixel} tiles
             </small>
             <CopyButton blueprint={namedBlueprint} icons={copyButtonIcons} />
-            <Button
-              title="Recalculate"
-              onClick={() => setConfig({ ...config })}
+            {"showSaveFilePicker" in window ? <Button
+              title="Download Blueprint to file"
+              onClick={async () => {
+                if(!namedBlueprint) return;
+
+                // @ts-expect-error
+                const fileHandle = await window.showSaveFilePicker({
+                  types: [
+                    {
+                      description: 'Text Files',
+                      accept: {
+                        'text/plain': ['.txt']
+                      }
+                    },
+                  ],
+                  suggestedName: name
+                }) as FileSystemFileHandle;
+
+                // @ts-expect-error
+                const writableStream = await fileHandle.createWritable() as FileSystemWritableFileStream;
+                await writableStream.write(encode(namedBlueprint));
+                await writableStream.close();
+              }}
             >
-              <span className="material-icons">replay</span>
-            </Button>
+              <span className="material-icons">download</span>
+            </Button> : null}
           </>
         )}
 

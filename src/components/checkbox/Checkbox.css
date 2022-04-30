@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-inline);
+  user-select: none;
 }
 
 .checkbox-input {

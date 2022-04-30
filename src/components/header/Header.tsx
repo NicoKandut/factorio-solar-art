@@ -17,7 +17,7 @@ const Header = ({ className }: { className?: string }) => {
           New version available. Click here to reload.
         </span>
       ) : (
-        <span className="header-version">v1.5.1</span>
+        <span className="header-version">v1.6.0</span>
       )}
       <Button
         title="Changelog"

@@ -44,7 +44,7 @@
 
   /* layout */
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 306px 2fr 2fr;
   grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "header header header"

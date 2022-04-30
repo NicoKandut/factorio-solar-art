@@ -4,19 +4,20 @@ import "./Checkbox.css";
 interface Props {
   value: boolean;
   setValue: (value: boolean) => void;
-  hint: string;
+  title: string;
 }
 
 export const Checkbox = (props: PropsWithChildren<Props>) => {
-  const { value, setValue, children, hint } = props;
+  const { value, setValue, children, title } = props;
 
   return (
-    <label className="checkbox" title={hint}>
+    <label className="checkbox" title={title}>
       <input
         type="checkbox"
         className="checkbox-input"
         checked={value}
-        onChange={() => setValue(!value)}
+        onClick={() => setValue(!value)}
+        readOnly
       />
       {children}
     </label>
