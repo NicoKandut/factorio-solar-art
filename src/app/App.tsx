@@ -138,10 +138,9 @@ export const App = () => {
                     },
                   ],
                   suggestedName: name
-                }) as FileSystemFileHandle;
+                }) as any /* FileSystemFileHandle */;
 
-                // @ts-expect-error
-                const writableStream = await fileHandle.createWritable() as FileSystemWritableFileStream;
+                const writableStream = await fileHandle.createWritable() as any /* FileSystemWritableFileStream */;
                 await writableStream.write(encode(namedBlueprint));
                 await writableStream.close();
               }}
