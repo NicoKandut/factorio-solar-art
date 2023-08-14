@@ -1,5 +1,4 @@
 import { deflate, inflate } from "pako";
-import { FactorioBlueprint } from "../types/factorio";
 
 const VERSION = "0";
 const UINT_CHUNK_SIZE = 65536;
@@ -20,13 +19,17 @@ export const uint8ToString = (array: Uint8Array) => {
 /**
  * Encodes a blueprint object to an importable string.
  */
-export const encode = (blueprint: FactorioBlueprint) => {
+export const encode = (blueprint: unknown) => {
   const jsonString = JSON.stringify(blueprint);
   const compressed = deflate(jsonString);
   const str = uint8ToString(compressed);
   const base64 = btoa(str);
 
+  
+  decode(VERSION + base64);
+
   return VERSION + base64;
+
 };
 
 /**
@@ -38,5 +41,5 @@ export const decode = (bluebrintString: string) => {
   const compressed = Uint8Array.from(charArray, (c) => c.charCodeAt(0));
   const jsonString = inflate(compressed, { to: "string" });
 
-  return JSON.parse(jsonString) as FactorioBlueprint;
+  return JSON.parse(jsonString) as unknown;
 };

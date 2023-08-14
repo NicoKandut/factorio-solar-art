@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { encode } from "../logic/serialization";
-import { FactorioBlueprint } from "../types/factorio";
+import * as factorio from "../factorio-blueprint-utils";
 
 export const useBlueprintSerializer = (
-  blueprint: FactorioBlueprint | null | undefined,
+  blueprint: factorio.Serializable | null | undefined,
   onComplete: (value: string) => void
 ) => {
   useEffect(() => {

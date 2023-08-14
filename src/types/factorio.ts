@@ -5,7 +5,10 @@ export type EntityType =
   | "accumulator"
   | "stone-wall"
   | "radar"
+  | "se-space-solar-panel"
+  | "se-space-solar-panel-2"
   | "se-space-solar-panel-3"
+  | "se-space-accumulator"
   | "se-space-accumulator-2"
   | "se-pylon-substation"
   | "se-pylon-construction"
@@ -13,53 +16,6 @@ export type EntityType =
   | "se-supercharger";
 
 export type TileType = "stone-path" | "refined-concrete";
-
-export interface FactorioColor {
-  r: number;
-  g: number;
-  b: number;
-  a: number;
-}
-
-export interface FactorioPosition {
-  x: number;
-  y: number;
-}
-
-export interface FactorioEntity {
-  entity_number: number;
-  name: EntityType;
-  position: FactorioPosition;
-  control_behavior?: any;
-}
-
-export interface FactorioTile {
-  name: TileType;
-  position: FactorioPosition;
-}
-
-export interface FactorioSignal {
-  name: string;
-  type: "item" | "fluid" | "virtual";
-}
-
-export interface FactorioIcon {
-  index: number;
-  signal: FactorioSignal;
-}
-
-export interface FactorioBlueprint {
-  blueprint: {
-    item: "blueprint";
-    label: string;
-    label_color?: FactorioColor;
-    entities: FactorioEntity[];
-    tiles: FactorioTile[];
-    icons?: FactorioIcon[];
-    schedules?: any;
-    version: number;
-  };
-}
 
 export const sizes: Record<EntityType | TileType, number> = {
   accumulator: 2,
@@ -70,7 +26,10 @@ export const sizes: Record<EntityType | TileType, number> = {
   "stone-path": 1,
   "refined-concrete": 1,
   radar: 3,
+  "se-space-solar-panel": 4,
+  "se-space-solar-panel-2": 4,
   "se-space-solar-panel-3": 4,
+  "se-space-accumulator": 2,
   "se-space-accumulator-2": 2,
   "se-pylon-substation": 2,
   "se-pylon-construction": 2,
@@ -84,6 +43,7 @@ export const sizes: Record<EntityType | TileType, number> = {
 export const paletteIndexOf: Record<EntityType | TileType, number> = {
   "stone-wall": 1,
   accumulator: 2,
+  "se-space-accumulator": 2,
   "se-space-accumulator-2": 2,
   "stone-path": 3,
   "refined-concrete": 4,
@@ -95,6 +55,8 @@ export const paletteIndexOf: Record<EntityType | TileType, number> = {
   "se-pylon-substation": 6,
   radar: 7,
   "solar-panel": 8,
+  "se-space-solar-panel": 8,
+  "se-space-solar-panel-2": 8,
   "se-space-solar-panel-3": 8,
 };
 

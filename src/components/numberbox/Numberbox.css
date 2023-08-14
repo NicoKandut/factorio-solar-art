@@ -17,3 +17,7 @@
   background-color: var(--weird-cream);
   box-shadow: var(--shadow-cutout);
 }
+
+.numberbox-input:disabled {
+  background-color: var(--bg-light);
+}

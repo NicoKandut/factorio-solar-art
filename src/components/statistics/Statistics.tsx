@@ -1,16 +1,19 @@
 import { useMemo } from "react";
 import { watts } from "../../logic/numberformatting";
-import { EntityType, FactorioBlueprint, TileType } from "../../types/factorio";
+import * as factorio from "../../factorio-blueprint-utils/src";
 import { Item } from "../item/Item";
 import "./Statistics.css";
+import { EntityType } from "../../types/factorio";
+import { SE_ACCUMULATORS, SE_PANELS } from "../../logic/sePixelFactory";
 
 interface Props {
-  blueprint: FactorioBlueprint | null;
+  blueprints: Array<factorio.WrappedBlueprint>;
   useSpaceExploration: boolean;
+  panel: 1 | 2 | 3;
+  accumulator: 1 | 2 | 3;
 }
 
 const perfectVanillaRatio = 21 / 25;
-const perfectSeRatio = 0.168 * (1.6e6 / 250e6) * 416.66;
 
 const ratingOf = (value: number, perfectRatio: number) => {
   const diff = Math.abs(value - perfectRatio);
@@ -22,41 +25,46 @@ const ratingOf = (value: number, perfectRatio: number) => {
 };
 
 export const Statistics = (props: Props) => {
-  const { blueprint, useSpaceExploration } = props;
+  const { blueprints, useSpaceExploration, panel, accumulator } = props;
 
   const statistics = useMemo(() => {
-    if (blueprint) {
-      return [
-        ...blueprint.blueprint.entities,
-        ...blueprint.blueprint.tiles,
-      ].reduce((acc, entity) => {
-        if (!acc[entity.name]) {
-          acc[entity.name] = 0;
-        }
+    const stats: Record<string, number> = {};
 
-        acc[entity.name]++;
-        return acc;
-      }, {} as Record<EntityType | TileType, number>);
-    }
-  }, [blueprint]);
+    blueprints.forEach((blueprint) => {
+      blueprint.blueprint.entities.forEach((entity) => {
+        stats[entity.name] = entity.name in stats ? stats[entity.name] + 1 : 0;
+      });
 
-  if (!blueprint || !statistics) {
+      blueprint.blueprint.entities.forEach((entity) => {
+        stats[entity.name] = entity.name in stats ? stats[entity.name] + 1 : 0;
+      });
+    });
+
+    return stats;
+  }, [blueprints]);
+
+  if (blueprints.length === 0 || !statistics) {
     return null;
   }
 
   const accumulatorType = useSpaceExploration
-    ? "se-space-accumulator-2"
+    ? SE_ACCUMULATORS[accumulator]
     : "accumulator";
-  const panelType = useSpaceExploration
-    ? "se-space-solar-panel-3"
-    : "solar-panel";
+  const panelType = useSpaceExploration ? SE_PANELS[panel] : "solar-panel";
   const panelMax = {
+    "se-space-solar-panel": 400e3,
+    "se-space-solar-panel-2": 800e3,
     "se-space-solar-panel-3": 1600e3,
     "solar-panel": 60e3,
   }[panelType];
+  const accumulatorMax = {
+    accumulator: 5e6,
+    "se-space-accumulator": 50e6,
+    "se-space-accumulator-2": 250e6,
+  }[accumulatorType];
 
   const perfectRatio = useSpaceExploration
-    ? perfectSeRatio
+    ? 0.168 * (panelMax / accumulatorMax) * 416.6666666
     : perfectVanillaRatio;
   const ratio = statistics[accumulatorType] / statistics[panelType];
 

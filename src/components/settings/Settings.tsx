@@ -58,6 +58,34 @@ export const Settings = (props: Props) => {
       >
         <label>Use Radars</label>
       </Checkbox>
+      <Checkbox
+        value={config.book}
+        setValue={(v) => setConfig({ ...config, book: v })}
+        title="Generate a blueprint book containing multiple blueprints instead of a single blueprint."
+      >
+        <label>Generate Blueprint Book</label>
+      </Checkbox>
+      <Numberbox
+        label="Split Size"
+        value={config.blueprintSize}
+        setValue={(v) => setConfig({ ...config, blueprintSize: v })}
+        hint="Determine the size of the blueprints in the book."
+        disabled={!config.book}
+      />
+      <Checkbox
+        value={config.snapping}
+        setValue={(v) => setConfig({ ...config, snapping: v })}
+        title="Make the blueprint snap to a grid."
+      >
+        <label>Snapping</label>
+      </Checkbox>
+      <Numberbox
+        label="Snap Size"
+        value={config.snappingSize}
+        setValue={(v) => setConfig({ ...config, snappingSize: v })}
+        hint="Grid size for snapping."
+        disabled={!config.snapping}
+      />
       <Slider
         min={0}
         max={1}
@@ -75,17 +103,141 @@ export const Settings = (props: Props) => {
         hint="Scale the resulting blueprint."
       ></Numberbox>
       <Checkbox
-        value={config.mods.spaceExploration}
+        value={config.mods.spaceExploration.enabled}
         setValue={(v) =>
           setConfig({
             ...config,
-            mods: { ...config.mods, spaceExploration: v },
+            mods: {
+              ...config.mods,
+              spaceExploration: {
+                ...config.mods.spaceExploration,
+                enabled: v,
+              },
+            },
           })
         }
         title="When enabled, the blueprint will use items from space exploration."
       >
         <label>[MOD] Space Exploration</label>
       </Checkbox>
+      {config.mods.spaceExploration.enabled ? (
+        <>
+          <Checkbox
+            value={config.mods.spaceExploration.accumulatorTier === 1}
+            setValue={(v) =>
+              v &&
+              setConfig({
+                ...config,
+                mods: {
+                  ...config.mods,
+                  spaceExploration: {
+                    ...config.mods.spaceExploration,
+                    accumulatorTier: 1,
+                  },
+                },
+              })
+            }
+            title="Accumulator Tier 1"
+          >
+            <label>Accumulator Tier 1</label>
+          </Checkbox>
+          <Checkbox
+            value={config.mods.spaceExploration.accumulatorTier === 2}
+            setValue={(v) =>
+              v &&
+              setConfig({
+                ...config,
+                mods: {
+                  ...config.mods,
+                  spaceExploration: {
+                    ...config.mods.spaceExploration,
+                    accumulatorTier: 2,
+                  },
+                },
+              })
+            }
+            title="Accumulator Tier 2"
+          >
+            <label>Accumulator Tier 2</label>
+          </Checkbox>
+          <Checkbox
+            value={config.mods.spaceExploration.accumulatorTier === 3}
+            setValue={(v) =>
+              v &&
+              setConfig({
+                ...config,
+                mods: {
+                  ...config.mods,
+                  spaceExploration: {
+                    ...config.mods.spaceExploration,
+                    accumulatorTier: 3,
+                  },
+                },
+              })
+            }
+            title="Accumulator Tier 3"
+          >
+            <label>Accumulator Tier 3</label>
+          </Checkbox>
+          <Checkbox
+            value={config.mods.spaceExploration.panelTier === 1}
+            setValue={(v) =>
+              v &&
+              setConfig({
+                ...config,
+                mods: {
+                  ...config.mods,
+                  spaceExploration: {
+                    ...config.mods.spaceExploration,
+                    panelTier: 1,
+                  },
+                },
+              })
+            }
+            title="Panel Tier 1"
+          >
+            <label>Panel Tier 1</label>
+          </Checkbox>
+          <Checkbox
+            value={config.mods.spaceExploration.panelTier === 2}
+            setValue={(v) =>
+              v &&
+              setConfig({
+                ...config,
+                mods: {
+                  ...config.mods,
+                  spaceExploration: {
+                    ...config.mods.spaceExploration,
+                    panelTier: 2,
+                  },
+                },
+              })
+            }
+            title="Panel Tier 2"
+          >
+            <label>Panel Tier 2</label>
+          </Checkbox>
+          <Checkbox
+            value={config.mods.spaceExploration.panelTier === 3}
+            setValue={(v) =>
+              v &&
+              setConfig({
+                ...config,
+                mods: {
+                  ...config.mods,
+                  spaceExploration: {
+                    ...config.mods.spaceExploration,
+                    panelTier: 3,
+                  },
+                },
+              })
+            }
+            title="Panel Tier 3"
+          >
+            <label>Panel Tier 3</label>
+          </Checkbox>
+        </>
+      ) : null}
     </div>
   );
 };

@@ -1,6 +1,6 @@
+import * as factorio from "../factorio-blueprint-utils/src";
 import { PngWriter } from "../png/PngWriter";
 import { PreviewCollector } from "../png/PreviewCollector";
-import { FactorioBlueprint } from "../types/factorio";
 import { Config } from "../types/ui";
 import {
   index,
@@ -22,7 +22,7 @@ import {
 /**
  * Creates a blueprint object
  */
-export const calculateBlueprint = async (
+export const calculateBlueprints = async (
   data: Uint8ClampedArray,
   size: { width: number; height: number },
   config: Config
@@ -31,15 +31,44 @@ export const calculateBlueprint = async (
 
   resetIdGenerator();
 
-  const blueprint: FactorioBlueprint = {
-    blueprint: {
-      item: "blueprint", // name overwritten outside of calculation to prevent unnecessary recalculation
-      label: "",
-      entities: [],
-      tiles: [],
-      version: 1,
-    },
-  };
+  const blueprints: Array<factorio.WrappedBlueprint> = [];
+
+  const blueprintWidth = Math.ceil(size.width / config.blueprintSize);
+  const blueprintHeight = Math.ceil(size.height / config.blueprintSize);
+
+  for (let index = 0; index < blueprintWidth * blueprintHeight; ++index) {
+    const x = index % blueprintWidth;
+    const y = Math.floor(index / blueprintWidth);
+    const from = {
+      x: x * config.blueprintSize,
+      y: y * config.blueprintSize,
+    };
+    const to = {
+      x: from.x + config.blueprintSize,
+      y: from.y + config.blueprintSize,
+    };
+
+    blueprints.push({
+      blueprint: {
+        item: "blueprint",
+        label: `Blueprint #${index} (${x}, ${y})`,
+        description: `Contains the pixels from (${from.x}, ${from.y}) to (${to.x}, ${to.y})`,
+        entities: [],
+        tiles: [],
+        version: 1,
+        ...(config.snapping
+          ? {
+              "snap-to-grid": {
+                x: config.snappingSize,
+                y: config.snappingSize,
+              },
+              "absolute-snapping": true,
+            }
+          : {}),
+      },
+      index,
+    });
+  }
 
   const tilesPerPixel = config.mods.spaceExploration
     ? SE_TILES_PER_PIXEL
@@ -62,6 +91,16 @@ export const calculateBlueprint = async (
       pixelX < size.width;
       pixelX++, tileX += tilesPerPixel
     ) {
+      const blueprint = config.book
+        ? blueprints[
+            index(
+              Math.floor(pixelX / config.blueprintSize),
+              Math.floor(pixelY / config.blueprintSize),
+              blueprintWidth
+            )
+          ]
+        : blueprints[0];
+
       const i = index(pixelX, pixelY, size.width, 4);
       const color = [data[i], data[i + 1], data[i + 2], data[i + 3]];
       const type = mapColor(color, config);
@@ -74,6 +113,10 @@ export const calculateBlueprint = async (
             charger: seNeedsSupercharger(pixelX, pixelY),
             offsetX: tileOffsetX,
             offsetY: tileOffsetY,
+            tiers: {
+              accumulator: config.mods.spaceExploration.accumulatorTier,
+              panel: config.mods.spaceExploration.panelTier,
+            },
           })
         : createPixel(type, tileX, tileY, collector, {
             tiles: config.tiles,
@@ -97,5 +140,5 @@ export const calculateBlueprint = async (
 
   console.debug("calculation time: %d ms", now - then);
 
-  return [blueprint, previewUrl] as const;
+  return [blueprints, previewUrl] as const;
 };

@@ -4,3 +4,8 @@
   gap: var(--spacing-inline);
   font-size: 14px;
 }
+
+.row {
+  display: flex;
+  gap: var(--spacing-inline);
+}

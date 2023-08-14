@@ -1,3 +1,4 @@
+import * as factorio from "../factorio-blueprint-utils/src";
 import { useMemo, useRef, useState } from "react";
 import { Button } from "../components/button/Button";
 import { CopyButton } from "../components/copybutton/CopyButton";
@@ -11,7 +12,6 @@ import { useBlueprintCalculation } from "../hooks/useBlueprintCalculation";
 import { useImageLoader } from "../hooks/useImageLoader";
 import { SE_TILES_PER_PIXEL, TILES_PER_PIXEL } from "../logic/constants";
 import { encode } from "../logic/serialization";
-import { FactorioBlueprint } from "../types/factorio";
 import { Config } from "../types/ui";
 import "./App.css";
 
@@ -23,8 +23,16 @@ const initialConfig: Config = {
   tiles: true,
   walls: true,
   radars: true,
+  book: false,
+  blueprintSize: 50,
+  snapping: true,
+  snappingSize: TILES_PER_PIXEL,
   mods: {
-    spaceExploration: false,
+    spaceExploration: {
+      enabled: false,
+      accumulatorTier: 1,
+      panelTier: 1,
+    },
   },
 };
 
@@ -39,26 +47,45 @@ const copyButtonIcons = {
 export const App = () => {
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const [name, setName] = useState(initialName);
+  const [label, setLabel] = useState(initialName);
   const [config, setConfig] = useState(initialConfig);
   const [file, setFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState("");
   const [size, setSize] = useState({ width: 0, height: 0 });
-  const [blueprint, setBlueprint] = useState<FactorioBlueprint | null>(null);
   const [previewSrc, setPreviewSrc] = useState("");
+  const [blueprints, setBlueprints] = useState<
+    Array<factorio.WrappedBlueprint>
+  >([]);
+  const hasBlueprint = blueprints.length > 0;
 
-  const namedBlueprint: FactorioBlueprint | null = useMemo(
-    () =>
-      blueprint
-        ? {
-            blueprint: { ...blueprint.blueprint, label: name },
-          }
-        : null,
-    [blueprint, name]
-  );
+  const namedSerializable: factorio.Serializable | null = useMemo(() => {
+    if (hasBlueprint) {
+      if (config.book) {
+        return {
+          blueprint_book: {
+            blueprints,
+            label,
+            item: "blueprint-book",
+            description: "This is description",
+            active_index: 0,
+            version: 1,
+          },
+        } as factorio.WrappedBlueprintBook;
+      }
+
+      return {
+        blueprint: {
+          name: label,
+          ...blueprints[0].blueprint,
+        },
+      } as factorio.WrappedBlueprint;
+    }
+
+    return null;
+  }, [blueprints, label, config.book, hasBlueprint]);
 
   useImageLoader(imageRef, file, config.scale, setImageSrc, setSize);
-  useBlueprintCalculation(imageRef, size, config, setBlueprint, setPreviewSrc);
+  useBlueprintCalculation(imageRef, size, config, setBlueprints, setPreviewSrc);
   const tilesPerPixel = config.mods.spaceExploration
     ? SE_TILES_PER_PIXEL
     : TILES_PER_PIXEL;
@@ -70,8 +97,8 @@ export const App = () => {
         <Settings
           config={config}
           setConfig={setConfig}
-          name={name}
-          setName={setName}
+          name={label}
+          setName={setLabel}
         />
       </Section>
 
@@ -95,7 +122,7 @@ export const App = () => {
                 setFile(null);
                 setImageSrc("");
                 setSize({ width: 0, height: 0 });
-                setBlueprint(null);
+                setBlueprints([]);
                 setPreviewSrc("");
               }}
             >
@@ -121,36 +148,39 @@ export const App = () => {
             <small>
               {size.width * tilesPerPixel} x {size.height * tilesPerPixel} tiles
             </small>
-            <CopyButton blueprint={namedBlueprint} icons={copyButtonIcons} />
-            {"showSaveFilePicker" in window ? <Button
-              title="Download Blueprint to file"
-              onClick={async () => {
-                if(!namedBlueprint) return;
+            <CopyButton blueprint={namedSerializable} icons={copyButtonIcons} />
+            {"showSaveFilePicker" in window ? (
+              <Button
+                title="Download Blueprint to file"
+                onClick={async () => {
+                  if (!namedSerializable) return;
 
-                // @ts-expect-error
-                const fileHandle = await window.showSaveFilePicker({
-                  types: [
-                    {
-                      description: 'Text Files',
-                      accept: {
-                        'text/plain': ['.txt']
-                      }
-                    },
-                  ],
-                  suggestedName: name
-                }) as any /* FileSystemFileHandle */;
+                  // @ts-expect-error
+                  const fileHandle = (await window.showSaveFilePicker({
+                    types: [
+                      {
+                        description: "Text Files",
+                        accept: {
+                          "text/plain": [".txt"],
+                        },
+                      },
+                    ],
+                    suggestedName: label,
+                  })) as any; /* FileSystemFileHandle */
 
-                const writableStream = await fileHandle.createWritable() as any /* FileSystemWritableFileStream */;
-                await writableStream.write(encode(namedBlueprint));
-                await writableStream.close();
-              }}
-            >
-              <span className="material-icons">download</span>
-            </Button> : null}
+                  const writableStream =
+                    (await fileHandle.createWritable()) as any; /* FileSystemWritableFileStream */
+                  await writableStream.write(encode(namedSerializable));
+                  await writableStream.close();
+                }}
+              >
+                <span className="material-icons">download</span>
+              </Button>
+            ) : null}
           </>
         )}
 
-        {file && !blueprint ? (
+        {file && !hasBlueprint ? (
           <CenteredLoader />
         ) : previewSrc ? (
           <img src={previewSrc} alt="preview" className="preview-image" />
@@ -159,8 +189,10 @@ export const App = () => {
 
       <Section title="Statistics" className="area-statistics">
         <Statistics
-          blueprint={blueprint}
-          useSpaceExploration={config.mods.spaceExploration}
+          blueprints={blueprints}
+          useSpaceExploration={config.mods.spaceExploration.enabled}
+          panel={config.mods.spaceExploration.panelTier}
+          accumulator={config.mods.spaceExploration.accumulatorTier}
         />
       </Section>
     </div>

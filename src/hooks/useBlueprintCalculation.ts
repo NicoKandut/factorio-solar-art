@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
-import { calculateBlueprint } from "../logic/calculator";
+import { calculateBlueprints } from "../logic/calculator";
 import { sharedCanvasContext } from "../logic/sharedCanvasContext";
-import { FactorioBlueprint } from "../types/factorio";
+import * as factorio from "../factorio-blueprint-utils/src";
 import { Size } from "../types/types";
 import { Config } from "../types/ui";
 
@@ -9,7 +9,7 @@ export const useBlueprintCalculation = (
   imageRef: RefObject<HTMLImageElement>,
   size: Size,
   config: Config,
-  setBlueprint: (blueprint: FactorioBlueprint) => void,
+  setBlueprints: (blueprints: Array<factorio.WrappedBlueprint>) => void,
   setPreviewSrc: (url: string) => void
 ) => {
   useEffect(() => {
@@ -23,10 +23,14 @@ export const useBlueprintCalculation = (
         size.height
       ).data;
 
-      calculateBlueprint(data, size, config).then(([b, preview]) => {
-        setBlueprint(b);
+      if(config.book) {
+        
+      }
+
+      calculateBlueprints(data, size, config).then(([b, preview]) => {
+        setBlueprints(b);
         setPreviewSrc(preview);
       });
     }
-  }, [config, imageRef, setBlueprint, setPreviewSrc, size]);
+  }, [config, imageRef, setBlueprints, setPreviewSrc, size]);
 };

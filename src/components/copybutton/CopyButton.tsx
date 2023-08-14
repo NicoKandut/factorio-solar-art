@@ -1,12 +1,12 @@
+import * as factorio from "../../factorio-blueprint-utils/src";
 import { ReactNode, useEffect, useState } from "react";
 import { encode } from "../../logic/serialization";
-import { FactorioBlueprint } from "../../types/factorio";
 import { Button } from "../button/Button";
 
 const stateTimeout = 1000;
 
 interface Props {
-  blueprint: FactorioBlueprint | null;
+  blueprint: factorio.Serializable | null;
   icons: {
     success: ReactNode;
     error: ReactNode;

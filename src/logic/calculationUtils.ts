@@ -19,7 +19,7 @@ export const needsRadar = (x: number, y: number) =>
   (x + PIXEL_RADIUS_RADAR) % PIXEL_RANGE_RADAR === 0 &&
   (y + PIXEL_RADIUS_RADAR) % PIXEL_RANGE_RADAR === 0;
 
-export const index = (x: number, y: number, width: number, size: number) =>
+export const index = (x: number, y: number, width: number, size: number = 1) =>
   (y * width + x) * size;
 
 export const mapColor = (color: number[], config: Config): PixelType => {

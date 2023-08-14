@@ -1,5 +1,5 @@
 import { combine } from "../../logic/classnames";
-import { shorten } from "../../logic/numberformatting";
+import { compactFormat } from "../../logic/numberformatting";
 import { EntityType, TileType } from "../../types/factorio";
 import "./Item.css";
 
@@ -26,9 +26,16 @@ const itemUrls: Record<Items, string> = {
   radar: "https://wiki.factorio.com/images/thumb/Radar.png/32px-Radar.png",
   "stone-path":
     "https://wiki.factorio.com/images/thumb/Stone_brick.png/32px-Stone_brick.png",
-  "se-space-solar-panel-3": process.env.PUBLIC_URL + "/images/solar-panel.png",
+  "se-space-solar-panel":
+    process.env.PUBLIC_URL + "/images/se-solar-panel-1.png",
+  "se-space-solar-panel-2":
+    process.env.PUBLIC_URL + "/images/se-solar-panel-2.png",
+  "se-space-solar-panel-3":
+    process.env.PUBLIC_URL + "/images/se-solar-panel-2.png",
+  "se-space-accumulator":
+    process.env.PUBLIC_URL + "/images/se-accumulator-1.png",
   "se-space-accumulator-2":
-    process.env.PUBLIC_URL + "/images/accumulator-2.png",
+    process.env.PUBLIC_URL + "/images/se-accumulator-2.png",
   "se-pylon-substation":
     process.env.PUBLIC_URL + "/images/pylon-substation.png",
   "se-pylon-construction":
@@ -44,7 +51,7 @@ export const Item = (props: Props) => {
   return (
     <div className={combine("item", className)} title={name}>
       <img src={itemUrls[name]} alt={name} className="item-image" />
-      <span className="item-count">{shorten(count)}</span>
+      <span className="item-count">{compactFormat(count)}</span>
     </div>
   );
 };

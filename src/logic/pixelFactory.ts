@@ -1,10 +1,6 @@
+import * as factorio from "../factorio-blueprint-utils/src";
 import { PreviewCollector } from "../png/PreviewCollector";
-import type {
-  EntityType,
-  FactorioEntity,
-  FactorioTile,
-  TileType,
-} from "../types/factorio";
+import type { EntityType, TileType } from "../types/factorio";
 import {
   SE_TILE_SIZE_PYLON,
   SE_TILE_SIZE_SOLAR_PANEL,
@@ -35,8 +31,8 @@ export type Options = {
 };
 
 type Pixel = {
-  entities: FactorioEntity[];
-  tiles: FactorioTile[];
+  entities: factorio.Entity[];
+  tiles: factorio.Tile[];
 };
 
 const sizes: Record<EntityType, number> = {
@@ -46,7 +42,10 @@ const sizes: Record<EntityType, number> = {
   substation: TILE_SIZE_SUBSTATION,
   "stone-wall": TILE_SIZE_WALL,
   radar: TILE_SIZE_RADAR,
+  "se-space-solar-panel": SE_TILE_SIZE_SOLAR_PANEL,
+  "se-space-solar-panel-2": SE_TILE_SIZE_SOLAR_PANEL,
   "se-space-solar-panel-3": SE_TILE_SIZE_SOLAR_PANEL,
+  "se-space-accumulator": TILE_SIZE_ACCUMULATOR,
   "se-space-accumulator-2": TILE_SIZE_ACCUMULATOR,
   "se-pylon-substation": SE_TILE_SIZE_PYLON,
   "se-pylon-construction": SE_TILE_SIZE_PYLON,

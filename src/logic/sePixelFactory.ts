@@ -10,14 +10,30 @@ import {
 import { getIdGenerator } from "./entityIdGenerator";
 import { createEmptyPixel, EMPTY_PIXEL, PixelType } from "./pixelFactory";
 
-type Options = {
+export type Options = {
   tiles: boolean;
   power: boolean;
   radar: boolean;
   charger: boolean;
   offsetX: number;
   offsetY: number;
+  tiers: {
+    accumulator: 1 | 2 | 3;
+    panel: 1 | 2 | 3;
+  };
 };
+
+export const SE_ACCUMULATORS = {
+  "1": "accumulator",
+  "2": "se-space-accumulator",
+  "3": "se-space-accumulator-2",
+} as const;
+
+export const SE_PANELS = {
+  "1": "se-space-solar-panel",
+  "2": "se-space-solar-panel-2",
+  "3": "se-space-solar-panel-3",
+} as const;
 
 const accumulatorIndices = [
   [0, 0],
@@ -65,6 +81,9 @@ export const createSePixel = (
     return EMPTY_PIXEL;
   }
 
+  const accumulator = SE_ACCUMULATORS[options.tiers.accumulator];
+  const panel = SE_PANELS[options.tiers.panel];
+
   const pixel = createEmptyPixel();
   const idGenerator = getIdGenerator();
 
@@ -109,7 +128,7 @@ export const createSePixel = (
     } else {
       pixel.entities.push({
         entity_number: idGenerator.next().value,
-        name: "se-space-accumulator-2",
+        name: accumulator,
         position: {
           x: options.offsetX + x + 2,
           y: options.offsetY + y,
@@ -117,14 +136,14 @@ export const createSePixel = (
       });
       pixel.entities.push({
         entity_number: idGenerator.next().value,
-        name: "se-space-accumulator-2",
+        name: accumulator,
         position: {
           x: options.offsetX + x,
           y: options.offsetY + y + 2,
         },
       });
-      preview.writeRect("se-space-accumulator-2", x + 2, y);
-      preview.writeRect("se-space-accumulator-2", x, y + 2);
+      preview.writeRect(accumulator, x + 2, y);
+      preview.writeRect(accumulator, x, y + 2);
     }
 
     if (options.radar) {
@@ -157,25 +176,25 @@ export const createSePixel = (
       accumulatorIndices.forEach(([xi, yi]) => {
         pixel.entities.push({
           entity_number: idGenerator.next().value,
-          name: "se-space-accumulator-2",
+          name: accumulator,
           position: {
             x: options.offsetX + x + xi,
             y: options.offsetY + y + yi,
           },
         });
-        preview.writeRect("se-space-accumulator-2", x + xi, y + yi);
+        preview.writeRect(accumulator, x + xi, y + yi);
       });
       break;
     case "solar-panel":
       pixel.entities.push({
         entity_number: idGenerator.next().value,
-        name: "se-space-solar-panel-3",
+        name: panel,
         position: {
           x: options.offsetX + x + 1,
           y: options.offsetY + y + 1,
         },
       });
-      preview.writeRect("se-space-solar-panel-3", x, y);
+      preview.writeRect(panel, x, y);
       break;
     case "stone-wall":
       for (let iy = 0; iy < SE_TILES_PER_PIXEL; iy++) {

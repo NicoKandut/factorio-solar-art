@@ -6,6 +6,7 @@ interface Props {
   max?: number;
   setValue: (v: number) => void;
   className?: string;
+  disabled?: boolean
 }
 
 /**
@@ -13,7 +14,7 @@ interface Props {
  * The reason I do this is to offer more intuitive typing on desktop.
  */
 export default function NumberInput(props: Props) {
-  const { value, setValue, min = 0, max = Infinity, className } = props;
+  const { value, setValue, min = 0, max = Infinity, className, disabled = false } = props;
   const [internalValue, setInternalValue] = useState(value.toString());
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function NumberInput(props: Props) {
       type="text"
       className={className}
       value={internalValue}
+      disabled={disabled}
       onChange={(e) => setInternalValue(e.target.value)}
       onBlur={() => {
         const parsedValue = Number(internalValue);
