@@ -70,7 +70,7 @@ export const calculateBlueprints = async (
     });
   }
 
-  const tilesPerPixel = config.mods.spaceExploration
+  const tilesPerPixel = config.mods.spaceExploration.enabled
     ? SE_TILES_PER_PIXEL
     : TILES_PER_PIXEL;
 
@@ -105,7 +105,7 @@ export const calculateBlueprints = async (
       const color = [data[i], data[i + 1], data[i + 2], data[i + 3]];
       const type = mapColor(color, config);
 
-      const pixel = config.mods.spaceExploration
+      const pixel = config.mods.spaceExploration.enabled
         ? createSePixel(type, tileX, tileY, collector, {
             tiles: config.tiles,
             power: seNeedsPowerPylon(pixelX, pixelY),
