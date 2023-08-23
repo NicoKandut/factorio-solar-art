@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-const itemUrls: Record<Items, string> = {
+export const itemUrls: Record<Items, string> = {
   "solar-panel":
     "https://wiki.factorio.com/images/thumb/Solar_panel.png/32px-Solar_panel.png",
   accumulator:
@@ -31,7 +31,7 @@ const itemUrls: Record<Items, string> = {
   "se-space-solar-panel-2":
     process.env.PUBLIC_URL + "/images/se-solar-panel-2.png",
   "se-space-solar-panel-3":
-    process.env.PUBLIC_URL + "/images/se-solar-panel-2.png",
+    process.env.PUBLIC_URL + "/images/se-solar-panel-3.png",
   "se-space-accumulator":
     process.env.PUBLIC_URL + "/images/se-accumulator-1.png",
   "se-space-accumulator-2":

@@ -1,0 +1,20 @@
+.item-toggle {
+  --slot-size: 38px;
+  display: grid;
+  place-content: center;
+  width: var(--slot-size);
+  height: var(--slot-size);
+  background-color: var(--section-color);
+  box-shadow: var(--shadow-cutout);
+  border: none;
+}
+
+.item-toggle.active {
+  background-color: var(--accent-color);
+}
+
+.item-toggle-image {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}

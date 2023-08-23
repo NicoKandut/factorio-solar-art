@@ -86,7 +86,7 @@ export const App = () => {
 
   useImageLoader(imageRef, file, config.scale, setImageSrc, setSize);
   useBlueprintCalculation(imageRef, size, config, setBlueprints, setPreviewSrc);
-  const tilesPerPixel = config.mods.spaceExploration
+  const tilesPerPixel = config.mods.spaceExploration.enabled
     ? SE_TILES_PER_PIXEL
     : TILES_PER_PIXEL;
 

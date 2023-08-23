@@ -1,5 +1,7 @@
 import type { Config } from "../../types/ui";
 import { Checkbox } from "../checkbox/Checkbox";
+import { ItemToggle } from "../item-toggle/ItemToggle";
+import { itemUrls } from "../item/Item";
 import { Numberbox } from "../numberbox/Numberbox";
 import { Slider } from "../slider/Slider";
 import { Textbox } from "../textbox/Textbox";
@@ -65,13 +67,15 @@ export const Settings = (props: Props) => {
       >
         <label>Generate Blueprint Book</label>
       </Checkbox>
-      <Numberbox
-        label="Split Size"
-        value={config.blueprintSize}
-        setValue={(v) => setConfig({ ...config, blueprintSize: v })}
-        hint="Determine the size of the blueprints in the book."
-        disabled={!config.book}
-      />
+      {config.book ? (
+        <Numberbox
+          label="Split Size"
+          value={config.blueprintSize}
+          setValue={(v) => setConfig({ ...config, blueprintSize: v })}
+          hint="Determine the size of the blueprints in the book."
+          disabled={!config.book}
+        />
+      ) : null}
       <Checkbox
         value={config.snapping}
         setValue={(v) => setConfig({ ...config, snapping: v })}
@@ -79,13 +83,15 @@ export const Settings = (props: Props) => {
       >
         <label>Snapping</label>
       </Checkbox>
-      <Numberbox
-        label="Snap Size"
-        value={config.snappingSize}
-        setValue={(v) => setConfig({ ...config, snappingSize: v })}
-        hint="Grid size for snapping."
-        disabled={!config.snapping}
-      />
+      {config.snapping ? (
+        <Numberbox
+          label="Snap Size"
+          value={config.snappingSize}
+          setValue={(v) => setConfig({ ...config, snappingSize: v })}
+          hint="Grid size for snapping."
+          disabled={!config.snapping}
+        />
+      ) : null}
       <Slider
         min={0}
         max={1}
@@ -122,120 +128,106 @@ export const Settings = (props: Props) => {
       </Checkbox>
       {config.mods.spaceExploration.enabled ? (
         <>
-          <Checkbox
-            value={config.mods.spaceExploration.accumulatorTier === 1}
-            setValue={(v) =>
-              v &&
-              setConfig({
-                ...config,
-                mods: {
-                  ...config.mods,
-                  spaceExploration: {
-                    ...config.mods.spaceExploration,
-                    accumulatorTier: 1,
+          <div className="row">
+            <ItemToggle
+              item={"accumulator"}
+              active={config.mods.spaceExploration.accumulatorTier === 1}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  mods: {
+                    ...config.mods,
+                    spaceExploration: {
+                      ...config.mods.spaceExploration,
+                      accumulatorTier: 1,
+                    },
                   },
-                },
-              })
-            }
-            title="Accumulator Tier 1"
-          >
-            <label>Accumulator Tier 1</label>
-          </Checkbox>
-          <Checkbox
-            value={config.mods.spaceExploration.accumulatorTier === 2}
-            setValue={(v) =>
-              v &&
-              setConfig({
-                ...config,
-                mods: {
-                  ...config.mods,
-                  spaceExploration: {
-                    ...config.mods.spaceExploration,
-                    accumulatorTier: 2,
+                })
+              }
+            />
+            <ItemToggle
+              item={"se-space-accumulator"}
+              active={config.mods.spaceExploration.accumulatorTier === 2}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  mods: {
+                    ...config.mods,
+                    spaceExploration: {
+                      ...config.mods.spaceExploration,
+                      accumulatorTier: 2,
+                    },
                   },
-                },
-              })
-            }
-            title="Accumulator Tier 2"
-          >
-            <label>Accumulator Tier 2</label>
-          </Checkbox>
-          <Checkbox
-            value={config.mods.spaceExploration.accumulatorTier === 3}
-            setValue={(v) =>
-              v &&
-              setConfig({
-                ...config,
-                mods: {
-                  ...config.mods,
-                  spaceExploration: {
-                    ...config.mods.spaceExploration,
-                    accumulatorTier: 3,
+                })
+              }
+            />
+            <ItemToggle
+              item={"se-space-accumulator-2"}
+              active={config.mods.spaceExploration.accumulatorTier === 3}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  mods: {
+                    ...config.mods,
+                    spaceExploration: {
+                      ...config.mods.spaceExploration,
+                      accumulatorTier: 3,
+                    },
                   },
-                },
-              })
-            }
-            title="Accumulator Tier 3"
-          >
-            <label>Accumulator Tier 3</label>
-          </Checkbox>
-          <Checkbox
-            value={config.mods.spaceExploration.panelTier === 1}
-            setValue={(v) =>
-              v &&
-              setConfig({
-                ...config,
-                mods: {
-                  ...config.mods,
-                  spaceExploration: {
-                    ...config.mods.spaceExploration,
-                    panelTier: 1,
+                })
+              }
+            />
+          </div>
+          <div className="row">
+            <ItemToggle
+              item={"se-space-solar-panel"}
+              active={config.mods.spaceExploration.panelTier === 1}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  mods: {
+                    ...config.mods,
+                    spaceExploration: {
+                      ...config.mods.spaceExploration,
+                      panelTier: 1,
+                    },
                   },
-                },
-              })
-            }
-            title="Panel Tier 1"
-          >
-            <label>Panel Tier 1</label>
-          </Checkbox>
-          <Checkbox
-            value={config.mods.spaceExploration.panelTier === 2}
-            setValue={(v) =>
-              v &&
-              setConfig({
-                ...config,
-                mods: {
-                  ...config.mods,
-                  spaceExploration: {
-                    ...config.mods.spaceExploration,
-                    panelTier: 2,
+                })
+              }
+            />
+            <ItemToggle
+              item={"se-space-solar-panel-2"}
+              active={config.mods.spaceExploration.panelTier === 2}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  mods: {
+                    ...config.mods,
+                    spaceExploration: {
+                      ...config.mods.spaceExploration,
+                      panelTier: 2,
+                    },
                   },
-                },
-              })
-            }
-            title="Panel Tier 2"
-          >
-            <label>Panel Tier 2</label>
-          </Checkbox>
-          <Checkbox
-            value={config.mods.spaceExploration.panelTier === 3}
-            setValue={(v) =>
-              v &&
-              setConfig({
-                ...config,
-                mods: {
-                  ...config.mods,
-                  spaceExploration: {
-                    ...config.mods.spaceExploration,
-                    panelTier: 3,
+                })
+              }
+            />
+            <ItemToggle
+              item={"se-space-solar-panel-3"}
+              active={config.mods.spaceExploration.panelTier === 3}
+              onClick={() =>
+                setConfig({
+                  ...config,
+                  mods: {
+                    ...config.mods,
+                    spaceExploration: {
+                      ...config.mods.spaceExploration,
+                      panelTier: 3,
+                    },
                   },
-                },
-              })
-            }
-            title="Panel Tier 3"
-          >
-            <label>Panel Tier 3</label>
-          </Checkbox>
+                })
+              }
+            />
+          </div>
         </>
       ) : null}
     </div>
